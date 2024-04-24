@@ -1,7 +1,7 @@
 export const metaConfig = {
   feed: {
     title: "Bero's page",
-    content: "Get rewards for watching videos.",
+    content: "All things from Bero in a single page",
     image: "/static/cover.png",
     favicon: "/static/favicon.png",
   }
