@@ -8,7 +8,6 @@ import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { Affiliate } from "../components/organisms/affiliate";
-import { MyOffice } from "../components/organisms/my-office";
 import Confetti from 'react-confetti-boom';
 
 const socialContainerProps = { marginLeft: 'auto', marginRight: 'auto' }
@@ -17,8 +16,6 @@ export default function Home() {
   const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
 
   const videoId1 = "yU6Nhy3OC8Q";
-  const video2 = "QuHLw_A3WgY";
-
 
   useEffect(() => {
     function handleResize() {

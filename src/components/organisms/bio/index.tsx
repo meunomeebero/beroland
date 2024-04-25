@@ -1,9 +1,7 @@
-import { Avatar, Flex, FlexProps, HStack, Text } from "@chakra-ui/react";
+import { Avatar, Flex, FlexProps } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 type BioProps = FlexProps & { showLinks?: boolean };
-
-const linkStyle = { borderBottom: '2px #fff dashed', color: '#fff' };
 
 export function Bio({ showLinks, ...data}: BioProps) {
   const [offsetY, setOffsetY] = useState(0);
@@ -14,7 +12,6 @@ export function Bio({ showLinks, ...data}: BioProps) {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   return (
     <Flex

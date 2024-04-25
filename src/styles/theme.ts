@@ -15,13 +15,6 @@ export const dracula = {
   Yellow:	'#f1fa8c',
 };
 
-export const randomDraculaBackground = () => {
-  const { Cyan, Green, Orange, Pink, Purple, Red } = dracula;
-  const colors = [Cyan, Green, Orange, Pink, Purple, Red];
-  const index = Math.floor(Math.random() * colors.length + 1);
-  return colors[index];
-}
-
 export const goldenBorder = {
   position: 'absolute',
   display: 'block',
@@ -49,7 +42,6 @@ export const simpleHoverWithTranslation = {
   cursor: 'pointer',
   transform: 'translateY(+10px)'
 }
-
 
 export const textGradiant = {
   bgGradient: "linear(to-b, gray.50, transparent)",
