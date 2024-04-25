@@ -5,8 +5,8 @@ import { Bio } from "../components/organisms/bio";
 import { Social } from "../components/organisms/social";
 import { FaYoutube} from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
-import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
+import { useEffect, useState } from "react";
 import { Affiliate } from "../components/organisms/affiliate";
 import Confetti from 'react-confetti-boom';
 
