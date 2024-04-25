@@ -112,7 +112,7 @@ export default function Home() {
             <Affiliate
               data={{
                 link: "https://shipfa.st/?via=bero",
-                title: "🔥 Criar sua micro SaaS em apenas um dia com a",
+                title: "🔥 Crie sua micro SaaS em apenas um dia com a",
                 highlight: 'ShipFast',
                 image: '/static/sf.png',
               }}
