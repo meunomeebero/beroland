@@ -3,8 +3,6 @@ import { ElementContainer } from "../../atoms/element-container";
 import { SocialProps } from "./social";
 import { dracula } from "../../../styles/theme";
 import { useCallback } from "react";
-import Lottie from 'lottie-react';
-import animationData from '../../../../public/static/dance.json'
 
 const flexStyled = {
   border: "2px solid transparent",
@@ -54,9 +52,6 @@ export function Social({
             <Text color="gray.600" fontSize="sm">{title}</Text>
             <Text fontSize="sm" mt="1" opacity={0.7}>{content}</Text>
           </Box>
-          <Flex w="50px" h="50px" ml="auto">
-            <Lottie animationData={animationData}/>
-          </Flex>
           <Icon as={icon} w="6" h="6" color="pink.400"/>
         </a>
       </Flex>

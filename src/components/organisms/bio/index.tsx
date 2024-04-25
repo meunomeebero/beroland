@@ -1,6 +1,5 @@
-import { Avatar, Flex, FlexProps, HStack, Icon } from "@chakra-ui/react";
+import { Avatar, Flex, FlexProps, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link } from "../../atoms/link";
 
 type BioProps = FlexProps & { showLinks?: boolean };
 
@@ -24,7 +23,6 @@ export function Bio({ showLinks, ...data}: BioProps) {
       justify="center"
       direction="column"
       {...data}
-      bg="url(/static/bkg.png)"
       bgRepeat="repeat"
       bgPosition={`center ${offsetY * 0.5}px`}
       bgAttachment="fixed"
@@ -38,19 +36,6 @@ export function Bio({ showLinks, ...data}: BioProps) {
           border="2px solid #6272a4"
         />
       </Flex>
-      { showLinks && (
-        <HStack spacing="4" mt="4" mx="auto">
-          <Link href="https://blog.bero.land" aProps={linkStyle}>
-            📚 Blog
-          </Link>
-          <Link href="/" aProps={linkStyle}>
-            🔗 Home
-          </Link>
-          <Link href="/rank" aProps={linkStyle}>
-            🏆 Ranking
-          </Link>
-      </HStack>
-      )}
     </Flex>
   );
 }

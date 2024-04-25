@@ -12,8 +12,8 @@ const flexStyled = {
   }
 }
 
-export function CodeCrafters({
-  data: { link, title }
+export function Affiliate({
+  data: { link, title, highlight, image }
 }) {
   return (
     <a href={link} style={{ width: '100%' }}>
@@ -22,16 +22,24 @@ export function CodeCrafters({
         stackProps={{ padding: '2rem 1rem', margin: '0', ml: '0' }}
         marginLeft='auto'
         marginRight='auto'
+        overflow="hidden"
+        position="relative"
         {...flexStyled}
       >
         <Flex w="100%" align="center" justify="center">
-          <Image width="100px" height="100px" src="https://app.codecrafters.io/assets/7408d202b2bb110054fc.svg" alt="bero"/>
+          <Avatar src={image} w="100px" h="100px" bg="#000"/>
           <Icon as={FaPlus} color="green.400" mx="4"/>
           <Avatar src="/static/bero-fofo.png" w="100px" h="100px" bg="#000"/>
         </Flex>
         <Flex w="100%" align="center" justify="center">
-          <Flex direction="column" align="center" justify="center">
-            <Text color="gray.500" fontSize="lg" fontWeight="bold">{title}</Text>
+          <Flex direction="column" align="center" justify="center" w="70%" textAlign="center">
+            <Text color="gray.500" fontSize="lg" fontWeight="bold" >
+              {title} <span style={{
+                background: dracula.BackgroundPrimary,
+                padding: '0.2rem',
+                color: dracula.Comment,
+              }}>{highlight}</span>
+            </Text>
           </Flex>
         </Flex>
       </ElementContainer>

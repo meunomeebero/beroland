@@ -7,7 +7,7 @@ import { FaYoutube} from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
-import { CodeCrafters } from "../components/organisms/codecrafters";
+import { Affiliate } from "../components/organisms/affiliate";
 import { MyOffice } from "../components/organisms/my-office";
 import Confetti from 'react-confetti-boom';
 
@@ -42,19 +42,18 @@ export default function Home() {
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
           <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={656}>
-            <CodeCrafters data={{ link: "https://app.codecrafters.io/join?via=meunomeebero", title: "🔥 CodeCrafters 40% de desconto" }} />
+            <Affiliate
+              data={{
+                link: "https://app.codecrafters.io/join?via=meunomeebero",
+                title: "🔥 Aprenda a construir seu próprio redis, docker, torrent e muito mais do zero com a",
+                highlight: 'CodeCrafters',
+                image: 'https://app.codecrafters.io/assets/7408d202b2bb110054fc.svg',
+              }}
+            />
             <iframe
               width={iframeSize.width}
               height={iframeSize.height}
               src={`https://www.youtube.com/embed/${videoId1}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen>
-            </iframe>
-            <iframe
-              width={iframeSize.width}
-              height={iframeSize.height}
-              src={`https://www.youtube.com/embed/${video2}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen>
@@ -69,7 +68,6 @@ export default function Home() {
                 title: "YouTube - Shorts"
               }}
             />
-
             <Social
               icon={FaYoutube}
               containerProps={socialContainerProps}
@@ -110,7 +108,15 @@ export default function Home() {
                 title: "Discord"
               }}
             />
-            <MyOffice/>
+            {/* <MyOffice/> */}
+            <Affiliate
+              data={{
+                link: "https://shipfa.st/?via=bero",
+                title: "🔥 Criar sua micro SaaS em apenas um dia com a",
+                highlight: 'ShipFast',
+                image: '/static/sf.png',
+              }}
+            />
           </Stack>
         </MainContainer>
       </Flex>

@@ -68,8 +68,8 @@ export const theme = extendTheme({
     }
   },
   fonts: {
-    body: 'Roboto',
-    heading: 'Roboto',
+    body: 'Nunito',
+    heading: 'Nunito',
   },
   colors: {
     gray: {

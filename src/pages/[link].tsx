@@ -10,6 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // Mock data
   const map = {
     'cc': 'https://app.codecrafters.io/join?via=meunomeebero',
+    'links': '/',
+    'sf': 'https://shipfa.st/?via=bero',
   }
 
   return {
