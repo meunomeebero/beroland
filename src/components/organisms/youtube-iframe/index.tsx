@@ -1,11 +1,10 @@
+import { Flex } from "@chakra-ui/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useSortable } from "@dnd-kit/sortable";
-import {CSS} from '@dnd-kit/utilities';
+import { Draggable } from "../../atoms/draggable";
 
-export function YoutubeIframe({ id, videoId }) {
+export function YoutubeIframe({ data: { id, videoId }, isDraggable}) {
   const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
-
-  console.log({ comp: 'YoutubeIframe', id, videoId })
 
   useEffect(() => {
     function handleResize() {
@@ -21,33 +20,45 @@ export function YoutubeIframe({ id, videoId }) {
     return () => window.removeEventListener('resize', handleResize);
   }, [])
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({id});
-
   const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
     width: iframeSize.width,
     height: iframeSize.height,
-    cursor: 'grabbing',
   };
 
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <iframe
-        width={iframeSize.width}
-        height={iframeSize.height}
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title="YouTube video player"
-        allow="picture-in-picture"
-        allowFullScreen
-      >
-      </iframe>
-    </div>
+  const getVideoThumb = (id: string) => {
+    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
+  }
+
+  const Component = (
+    <iframe
+      width={iframeSize.width}
+      height={iframeSize.height}
+      src={`https://www.youtube.com/embed/${videoId}`}
+      title="YouTube video player"
+      allow="picture-in-picture"
+      allowFullScreen
+    />
   );
+
+  const DraggableComponent = (
+    <Flex
+      borderRadius="lg"
+      overflow="hidden"
+    >
+      <Image
+        alt="thumbnail"
+        src={getVideoThumb(videoId)}
+        height={iframeSize.height}
+        width={iframeSize.width}
+      />
+    </Flex>
+  );
+
+  return !isDraggable ? Component : (
+    <Draggable id={id} _style={style}>
+      {DraggableComponent}
+    </Draggable>
+  )
 }
+
+

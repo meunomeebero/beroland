@@ -2,12 +2,7 @@ import { Flex, Stack } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
-import { Social } from "../components/organisms/social";
-import { FaYoutube} from 'react-icons/fa';
-import { BsDiscord, BsTiktok } from "react-icons/bs";
-import { useEffect, useMemo, useState } from "react";
-import { AiFillInstagram } from "react-icons/ai";
-import { Affiliate } from "../components/organisms/affiliate";
+import { useState } from "react";
 import Confetti from 'react-confetti-boom';
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import {
@@ -19,15 +14,23 @@ import {
 import { Content, ContentType } from "../components/templates/content";
 import { SocialIcon } from "../components/organisms/social/social";
 
-const socialContainerProps = { marginLeft: 'auto', marginRight: 'auto' }
-
-
-
 export default function Home() {
-  const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
   const [items, setItems] = useState([
     {
       id: 1,
+      type: ContentType.Affiliate,
+      link: "https://app.codecrafters.io/join?via=meunomeebero",
+      title: "🔥 Aprenda a construir seu próprio redis, docker, torrent e muito mais do zero com a",
+      highlight: 'CodeCrafters',
+      image: 'https://app.codecrafters.io/assets/7408d202b2bb110054fc.svg',
+    },
+    {
+      id: 2,
+      type: ContentType.Iframe,
+      videoId: "yU6Nhy3OC8Q",
+    },
+    {
+      id: 3,
       content: '@meunomeebero',
       fallbackLink: 'https://www.youtube.com/@meunomeebero',
       link: 'youtube://www.youtube.com/user/meunomeebero',
@@ -36,7 +39,7 @@ export default function Home() {
       icon: SocialIcon.YouTube
     },
     {
-      id: 2,
+      id: 4,
       content: '@berolab',
       fallbackLink: 'https://www.youtube.com/@berolab',
       link: 'https://www.youtube.com/@berolab',
@@ -45,7 +48,7 @@ export default function Home() {
       icon: SocialIcon.YouTube
     },
     {
-      id: 3,
+      id: 5,
       content: '@meunomeebero',
       fallbackLink: 'https://www.instagram.com/meunomeebero',
       link: 'https://www.instagram.com/meunomeebero',
@@ -54,7 +57,7 @@ export default function Home() {
       icon: SocialIcon.Instagram
     },
     {
-      id: 4,
+      id: 6,
       content: '@meunomeebero',
       fallbackLink: 'https://www.tiktok.com/@meunomeebero',
       link: 'https://www.tiktok.com/@meunomeebero',
@@ -63,7 +66,7 @@ export default function Home() {
       icon: SocialIcon.TikTok
     },
     {
-      id: 5,
+      id: 7,
       content: 'mansaodev',
       fallbackLink: 'https://discord.gg/2e9RqKQuZV',
       link: 'discord://discord.com/invite/2e9RqKQuZV',
@@ -72,25 +75,14 @@ export default function Home() {
       icon: SocialIcon.Discord
     },
     {
-      id: 6,
-      type: ContentType.Iframe,
-      videoId: "yU6Nhy3OC8Q",
+      id: 8,
+      type: ContentType.Affiliate,
+      link: "https://shipfa.st/?via=bero",
+      title: "🔥 Crie sua micro SaaS em apenas um dia com a",
+      highlight: 'ShipFast',
+      image: '/static/sf.png',
     }
   ]);
-
-  useEffect(() => {
-    function handleResize() {
-      const width = window.innerWidth > 656 ? 656 : window.innerWidth - 32;
-      const height = width * 0.5625;
-      setIframeSize({ width, height });
-    }
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -135,9 +127,7 @@ export default function Home() {
                 <Content
                   type={si.type}
                   key={si.id}
-                  icon={si.icon}
                   isDraggable
-                  containerProps={socialContainerProps}
                   data={si}
                   {...si}
                 />
