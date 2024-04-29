@@ -29,10 +29,11 @@ model Users {
 }
 
 model Elements {
-  id Int @unique @default(autoincrement())
+  id Int             @unique @default(autoincrement())
   type ContentType
   data Json
   createdAt DateTime @default(now()) @map("created_at")
+  order Int
 
   @@map("elements")
 }
