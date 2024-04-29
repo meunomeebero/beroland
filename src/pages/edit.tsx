@@ -13,13 +13,76 @@ import {
 } from '@dnd-kit/sortable';
 import { Content, ContentType } from "../components/templates/content";
 import { SocialIcon } from "../components/organisms/social/social";
-import { NewsLetter } from "../components/molecules/newsletter";
-import { GetServerSideProps, GetStaticProps } from "next";
-import { prismaClient } from "./api/_prisma";
-import { formatJSON } from "../utils/format-json";
 
-export default function Home({ elements }) {
-  const [items, setItems] = useState(elements);
+export default function Home() {
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      type: ContentType.Affiliate,
+      link: "https://app.codecrafters.io/join?via=meunomeebero",
+      title: "🔥 Aprenda a construir seu próprio redis, docker, torrent e muito mais do zero com a",
+      highlight: 'CodeCrafters',
+      image: 'https://app.codecrafters.io/assets/7408d202b2bb110054fc.svg',
+    },
+    {
+      id: 2,
+      type: ContentType.Iframe,
+      videoId: "yU6Nhy3OC8Q",
+    },
+    {
+      id: 3,
+      content: '@meunomeebero',
+      fallbackLink: 'https://www.youtube.com/@meunomeebero',
+      link: 'youtube://www.youtube.com/user/meunomeebero',
+      title: "YouTube - Shorts",
+      type: ContentType.Social,
+      icon: SocialIcon.YouTube
+    },
+    {
+      id: 4,
+      content: '@berolab',
+      fallbackLink: 'https://www.youtube.com/@berolab',
+      link: 'https://www.youtube.com/@berolab',
+      title: "YouTube - Dicas de carreira",
+      type: ContentType.Social,
+      icon: SocialIcon.YouTube
+    },
+    {
+      id: 5,
+      content: '@meunomeebero',
+      fallbackLink: 'https://www.instagram.com/meunomeebero',
+      link: 'https://www.instagram.com/meunomeebero',
+      title: "Instagram",
+      type: ContentType.Social,
+      icon: SocialIcon.Instagram
+    },
+    {
+      id: 6,
+      content: '@meunomeebero',
+      fallbackLink: 'https://www.tiktok.com/@meunomeebero',
+      link: 'https://www.tiktok.com/@meunomeebero',
+      title: "TikTok",
+      type: ContentType.Social,
+      icon: SocialIcon.TikTok
+    },
+    {
+      id: 7,
+      content: 'mansaodev',
+      fallbackLink: 'https://discord.gg/2e9RqKQuZV',
+      link: 'discord://discord.com/invite/2e9RqKQuZV',
+      title: "Discord",
+      type: ContentType.Social,
+      icon: SocialIcon.Discord
+    },
+    {
+      id: 8,
+      type: ContentType.Affiliate,
+      link: "https://shipfa.st/?via=bero",
+      title: "🔥 Crie sua micro SaaS em apenas um dia com a",
+      highlight: 'ShipFast',
+      image: '/static/sf.png',
+    }
+  ]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -64,33 +127,16 @@ export default function Home({ elements }) {
                 <Content
                   type={si.type}
                   key={si.id}
+                  isDraggable
                   data={si}
                   {...si}
                 />
               ))}
             </SortableContext>
           </DndContext>
-          <NewsLetter/>
           </Stack>
         </MainContainer>
       </Flex>
     </>
   );
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const elemets = await prismaClient.elements.findMany();
-
-  const formatted = elemets.map(({ order, type, data }) => ({
-    id: order,
-    type,
-    ...formatJSON(data),
-  }));
-
-  return {
-    props: {
-      elements: formatJSON(formatted),
-    },
-    revalidate: 60 * 60, // one hour
-  }
 }

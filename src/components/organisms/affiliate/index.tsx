@@ -2,7 +2,7 @@ import { Flex, Text, Icon, Avatar } from "@chakra-ui/react";
 import { ElementContainer } from "../../atoms/element-container";
 import { dracula } from "../../../styles/theme";
 import { FaPlus } from "react-icons/fa";
-import Image from "next/image";
+import { Draggable } from "../../atoms/draggable";
 
 const flexStyled = {
   transition: "0.2s",
@@ -12,11 +12,9 @@ const flexStyled = {
   }
 }
 
-export function Affiliate({
-  data: { link, title, highlight, image }
-}) {
-  return (
-    <a href={link} style={{ width: '100%' }}>
+export function Affiliate({ data: { link, title, highlight, image, id }, isDraggable}) {
+  const Component = (
+    <a href={!isDraggable && link} style={{ width: '100%' }}>
       <ElementContainer
         size="sm"
         stackProps={{ padding: '2rem 1rem', margin: '0', ml: '0' }}
@@ -34,15 +32,26 @@ export function Affiliate({
         <Flex w="100%" align="center" justify="center">
           <Flex direction="column" align="center" justify="center" w="70%" textAlign="center">
             <Text color="gray.500" fontSize="lg" fontWeight="bold" >
-              {title} <span style={{
-                background: dracula.BackgroundPrimary,
-                padding: '0.2rem',
-                color: dracula.Comment,
-              }}>{highlight}</span>
+              {title}
+              <span
+                style={{
+                  background: dracula.BackgroundPrimary,
+                  padding: '0.2rem',
+                  color: dracula.Comment,
+                }}
+              >
+                {highlight}
+              </span>
             </Text>
           </Flex>
         </Flex>
       </ElementContainer>
     </a>
+  );
+
+  return !isDraggable ? Component : (
+    <Draggable id={id}>
+      {Component}
+    </Draggable>
   );
 }
