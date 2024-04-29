@@ -1,8 +1,0 @@
-### DEV
-DATABASE_URL="mysql://admin:MNUGSY3LMVXHIYLMMU======@chickentale.cni2mo06sp55.us-east-1.rds.amazonaws.com:3306/chickentale"
-STRIPE_SK="sk_test_51Ofq45JpsPbF9Dd0hijzmhp6wmeHALf7IiayxpqfZRxN8FuCsahlobxtNRFaAoaFIbLx5zkMTD9i2biMRe44KNhp00JQ1zrWVw"
-STRIPE_WEBHOOK_SEC="we_1P4kbnJpsPbF9Dd0XhGfb6IV"
-STRIPE_PRODUCT_ID=price_1OmNWpJpsPbF9Dd0dTh7rOIu
-
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=971834811953-v16uqhaqj39q6d7vems800d047lq6pmf.apps.googleusercontent.com
-NEXT_PUBLIC_APP_URL=http://localhost:3000

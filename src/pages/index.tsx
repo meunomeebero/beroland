@@ -13,6 +13,7 @@ import {
 } from '@dnd-kit/sortable';
 import { Content, ContentType } from "../components/templates/content";
 import { SocialIcon } from "../components/organisms/social/social";
+import { NewsLetter } from "../components/molecules/newsletter";
 
 export default function Home() {
   const [items, setItems] = useState([
@@ -133,6 +134,7 @@ export default function Home() {
               ))}
             </SortableContext>
           </DndContext>
+          <NewsLetter/>
           </Stack>
         </MainContainer>
       </Flex>
