@@ -91,6 +91,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       elements: formatJSON(formatted),
     },
-    revalidate: 60 * 60, // one hour
+    revalidate: 60 * 30, // one hour
   }
 }
