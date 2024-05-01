@@ -14,12 +14,14 @@ import {
 import { Content, ContentType } from "../components/templates/content";
 import { SocialIcon } from "../components/organisms/social/social";
 import { NewsLetter } from "../components/molecules/newsletter";
-import { GetServerSideProps, GetStaticProps } from "next";
 import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";
+import { GetServerSideProps } from "next";
 
-export default function Home({ elements }) {
-  const [items, setItems] = useState(elements);
+export default function Home({ elements }: { elements: Array<{ id: number, type: any }> }) {
+  const [items, setItems] = useState(
+    elements.sort((a, b) => a.id - b.id)
+  );
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -78,7 +80,7 @@ export default function Home({ elements }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const elemets = await prismaClient.elements.findMany();
 
   const formatted = elemets.map(({ order, type, data }) => ({
@@ -90,7 +92,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       elements: formatJSON(formatted),
-    },
-    revalidate: 60 * 30, // one hour
+    }
   }
 }
