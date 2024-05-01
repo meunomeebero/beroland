@@ -1,4 +1,5 @@
 import { Affiliate } from "../organisms/affiliate";
+import { Section } from "../organisms/section";
 import { Social } from "../organisms/social"
 import { YoutubeIframe } from "../organisms/youtube-iframe";
 
@@ -6,6 +7,7 @@ export enum ContentType {
   Social = 'SOCIAL',
   Iframe = 'IFRAME',
   Affiliate = 'AFFILIATE',
+  Section = 'SECTION',
 }
 
 export function Content(props) {
@@ -16,6 +18,8 @@ export function Content(props) {
       return <YoutubeIframe {...props}/>
     case ContentType.Affiliate:
       return <Affiliate {...props}/>
+    case ContentType.Section:
+      return <Section {...props}/>
     default:
       return;
   }

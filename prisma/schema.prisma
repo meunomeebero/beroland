@@ -17,6 +17,7 @@ enum ContentType {
   SOCIAL
   IFRAME
   AFFILIATE
+  SECTION
 }
 
 model Users {
