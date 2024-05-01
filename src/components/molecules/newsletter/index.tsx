@@ -1,6 +1,7 @@
 import { Box, Button, Divider, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useCallback, useState } from "react";
+import { Title } from "../../atoms/title";
 
 export function NewsLetter() {
   const [email, setEmail] = useState('');
@@ -26,7 +27,9 @@ export function NewsLetter() {
 
   return (
     <Box w="100%">
-      <Divider marginY="6"/>
+      <Title>
+        🔥 Receba dicas e novidades pelo email 🔥
+      </Title>
       <Flex w="100%">
         <Input
           variant="unstyled"
@@ -48,9 +51,6 @@ export function NewsLetter() {
           </Text>
         </Button>
       </Flex>
-        <Text color="gray.600" fontWeight="bold" mt="4" fontSize="md" w="80%" mx="auto" textAlign="center">
-          🔥 Fique por dentro de todas as novidades e receba dicas de carreira no seu email
-        </Text>
     </Box>
   )
 }
