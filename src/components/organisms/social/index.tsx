@@ -57,7 +57,7 @@ export function Social({
         <a
           style={aStyle}
           onClick={onClick}
-          href={!isDraggable && link}
+          { ...(!isDraggable ? { href: link } : {})} 
         >
           <Box>
             <Text color="gray.600" fontSize="sm">{title}</Text>

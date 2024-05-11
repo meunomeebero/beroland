@@ -7,6 +7,7 @@ export const errorWrapper = (handler: Handler) => {
     try {
       await original(req, res);
     } catch (err) {
+      console.error(err);
       return res.status(err.status ?? 500).json({
         message: err.message,
         status: err.status ?? 500,

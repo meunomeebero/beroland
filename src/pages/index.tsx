@@ -11,8 +11,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Content, ContentType } from "../components/templates/content";
-import { SocialIcon } from "../components/organisms/social/social";
+import { Content } from "../components/templates/content";
 import { NewsLetter } from "../components/molecules/newsletter";
 import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";

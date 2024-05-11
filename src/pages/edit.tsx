@@ -2,7 +2,7 @@ import { Flex, Stack } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from 'react-confetti-boom';
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import {
@@ -11,78 +11,15 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Content, ContentType } from "../components/templates/content";
-import { SocialIcon } from "../components/organisms/social/social";
+import { Content } from "../components/templates/content";
+import { prismaClient } from "./api/_prisma";
+import { formatJSON } from "../utils/format-json";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { debounce } from "../utils/debounce";
 
-export default function Home() {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      type: ContentType.Affiliate,
-      link: "https://app.codecrafters.io/join?via=meunomeebero",
-      title: "🔥 Aprenda a construir seu próprio redis, docker, torrent e muito mais do zero com a",
-      highlight: 'CodeCrafters',
-      image: 'https://app.codecrafters.io/assets/7408d202b2bb110054fc.svg',
-    },
-    {
-      id: 2,
-      type: ContentType.Iframe,
-      videoId: "yU6Nhy3OC8Q",
-    },
-    {
-      id: 3,
-      content: '@meunomeebero',
-      fallbackLink: 'https://www.youtube.com/@meunomeebero',
-      link: 'youtube://www.youtube.com/user/meunomeebero',
-      title: "YouTube - Shorts",
-      type: ContentType.Social,
-      icon: SocialIcon.YouTube
-    },
-    {
-      id: 4,
-      content: '@berolab',
-      fallbackLink: 'https://www.youtube.com/@berolab',
-      link: 'https://www.youtube.com/@berolab',
-      title: "YouTube - Dicas de carreira",
-      type: ContentType.Social,
-      icon: SocialIcon.YouTube
-    },
-    {
-      id: 5,
-      content: '@meunomeebero',
-      fallbackLink: 'https://www.instagram.com/meunomeebero',
-      link: 'https://www.instagram.com/meunomeebero',
-      title: "Instagram",
-      type: ContentType.Social,
-      icon: SocialIcon.Instagram
-    },
-    {
-      id: 6,
-      content: '@meunomeebero',
-      fallbackLink: 'https://www.tiktok.com/@meunomeebero',
-      link: 'https://www.tiktok.com/@meunomeebero',
-      title: "TikTok",
-      type: ContentType.Social,
-      icon: SocialIcon.TikTok
-    },
-    {
-      id: 7,
-      content: 'mansaodev',
-      fallbackLink: 'https://discord.gg/2e9RqKQuZV',
-      link: 'discord://discord.com/invite/2e9RqKQuZV',
-      title: "Discord",
-      type: ContentType.Social,
-      icon: SocialIcon.Discord
-    },
-    {
-      id: 8,
-      type: ContentType.Affiliate,
-      link: "https://shipfa.st/?via=bero",
-      title: "🔥 Crie sua micro SaaS em apenas um dia com a",
-      highlight: 'ShipFast',
-      image: '/static/sf.png',
-    }
-  ]);
+export default function Home({ elements }: { elements: Array<{ id: number, type: any, dbId: number }> }) {
+  const [items, setItems] = useState(elements.sort((a, b) => a.id - b.id));
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -105,6 +42,20 @@ export default function Home() {
       });
     }
   }
+
+  useEffect(() => {
+    const data = items.map((i, index) => ({ id: i.dbId, order: index }));
+    console.log(data)
+    async function saveToDB() {
+      try {
+        await axios.post('/api/elements', { elements: data });
+      } catch (err) {
+        alert(err)
+      }
+    }
+
+    debounce(100, saveToDB)
+  }, [items]);
 
   return (
     <>
@@ -139,4 +90,21 @@ export default function Home() {
       </Flex>
     </>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const elemets = await prismaClient.elements.findMany();
+
+  const formatted = elemets.map(({ order, type, data, id }) => ({
+    id: order + 1,
+    dbId: id,
+    type,
+    ...formatJSON(data),
+  }));
+
+  return {
+    props: {
+      elements: formatJSON(formatted),
+    }
+  }
 }
