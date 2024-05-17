@@ -16,6 +16,7 @@ import { NewsLetter } from "../components/molecules/newsletter";
 import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";
 import { GetServerSideProps } from "next";
+import { Location } from "@prisma/client";
 
 export default function Home({ elements }: { elements: Array<{ id: number, type: any }> }) {
   const [items, setItems] = useState(
@@ -71,7 +72,7 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
               ))}
             </SortableContext>
           </DndContext>
-          <NewsLetter/>
+          <NewsLetter location={Location.BR}/>
           </Stack>
         </MainContainer>
       </Flex>
@@ -80,7 +81,7 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const elemets = await prismaClient.elements.findMany();
+  const elemets = await prismaClient.elements.findMany({ where: { location: Location.BR } });
 
   const formatted = elemets.map(({ order, type, data }) => ({
     id: order,

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { Title } from "../../atoms/title";
 
-export function NewsLetter() {
+export function NewsLetter({ location }) {
   const [email, setEmail] = useState('');
 
   const toast = useToast();
@@ -14,7 +14,7 @@ export function NewsLetter() {
     }
 
     try {
-      await axios.post('/api/leads', { email });
+      await axios.post('/api/leads', { email, location });
       toast({ title: 'Email cadastrado', status: 'success' })
     } catch (err) {
       if (err.request.status === 409) {
@@ -23,7 +23,7 @@ export function NewsLetter() {
 
       toast({ title:'Falha ao cadastrar email', status: 'error' })
     }
-  }, [email, toast]);
+  }, [email, toast, location]);
 
   return (
     <Box w="100%">

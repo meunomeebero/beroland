@@ -3,11 +3,12 @@ import { prismaClient } from "./_prisma";
 import { Handler } from "./_types";
 
 const handler: Handler = async (req, res) => {
-  const { email } = req.body;
+  const { email, location } = req.body;
 
   const userAlreadyCreated = await prismaClient.leeds.findFirst({
     where: {
       email,
+      location,
     }
   });
 
