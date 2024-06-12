@@ -6,6 +6,7 @@ export enum SocialIcon {
   Instagram = 'AiFillInstagram',
   TikTok = 'BsTiktok',
   Discord = 'BsDiscord',
+  File = 'FaFile',
 }
 
 export interface SocialProps {

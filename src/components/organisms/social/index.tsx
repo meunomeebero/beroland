@@ -3,7 +3,7 @@ import { ElementContainer } from "../../atoms/element-container";
 import { SocialIcon, SocialProps } from "./social";
 import { dracula } from "../../../styles/theme";
 import { useCallback } from "react";
-import { FaYoutube} from 'react-icons/fa';
+import { FaYoutube, FaFile } from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Draggable } from "../../atoms/draggable";
@@ -43,6 +43,7 @@ export function Social({
     [SocialIcon.Discord, BsDiscord],
     [SocialIcon.Instagram, AiFillInstagram],
     [SocialIcon.TikTok, BsTiktok],
+    [SocialIcon.File, FaFile],
   ])
 
   const NormalComponent = (
@@ -57,7 +58,7 @@ export function Social({
         <a
           style={aStyle}
           onClick={onClick}
-          { ...(!isDraggable ? { href: link } : {})} 
+          { ...(!isDraggable ? { href: link } : {})}
         >
           <Box>
             <Text color="gray.600" fontSize="sm">{title}</Text>
