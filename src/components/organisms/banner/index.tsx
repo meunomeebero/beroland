@@ -26,7 +26,6 @@ export function Banner({ data: { id, imageURL, url }, isDraggable}) {
 
   const Component = (
     <Flex
-      borderRadius="lg"
       overflow="hidden"
     >
       <Image
