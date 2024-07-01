@@ -30,14 +30,6 @@ export function Social({
   containerProps,
   data: { content, link, title, fallbackLink, id }
 }: SocialProps) {
-  const onClick = useCallback(() => {
-    window.location.href = link;
-    setTimeout(function() {
-      console.log('redirecting to fallback link');
-      window.location.href = fallbackLink;
-    }, 3000);
-  }, [fallbackLink, link]);
-
   const iconMap = new Map([
     [SocialIcon.YouTube, FaYoutube],
     [SocialIcon.Discord, BsDiscord],
@@ -57,7 +49,6 @@ export function Social({
       <Flex h="100%">
         <a
           style={aStyle}
-          onClick={onClick}
           { ...(!isDraggable ? { href: link } : {})}
         >
           <Box>

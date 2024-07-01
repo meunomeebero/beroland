@@ -49,7 +49,7 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
     <>
       <Head />
       <Flex direction="column"  w="100vw" align="center" justify="center">
-        <Bio p="8" />
+        <Bio pt="8" pb="0" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
         <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={656}>
