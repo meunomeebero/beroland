@@ -49,3 +49,13 @@ export class ConflictError extends AppError {
     });
   }
 }
+
+export class NotAuthorizedError extends AppError {
+  constructor(message: string) {
+    super({
+      status: 401,
+      error: 'Not authorized',
+      message: message,
+    });
+  }
+}

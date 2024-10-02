@@ -15,23 +15,15 @@ enum ContentType {
   BANNER
 }
 
-model Users {
-  id        Int      @unique @default(autoincrement())
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@map("users")
-}
-
 model Elements {
   id        Int           @unique @default(autoincrement())
   type      ContentType
   data      Json
   createdAt DateTime      @default(now()) @map("created_at")
   order     Int
-  location Location @default(BR)
+  pageId    Int
 
+  page      Pages         @relation(fields: [pageId], references: [id])
   @@map("elements")
 }
 
@@ -41,6 +33,18 @@ model Leeds {
   location Location @default(BR)
 
   @@map("leads")
+}
+
+model Pages {
+  id        Int      @unique @default(autoincrement())
+  title     String
+  slug      String   @unique
+  head      String?
+
+
+  elements  Elements[]
+
+  @@map("pages")
 }
 
 enum Location {

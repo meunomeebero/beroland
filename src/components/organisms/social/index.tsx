@@ -1,9 +1,9 @@
-import { Box, Flex, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, Radio } from "@chakra-ui/react";
 import { ElementContainer } from "../../atoms/element-container";
 import { SocialIcon, SocialProps } from "./social";
 import { dracula } from "../../../styles/theme";
 import { useCallback } from "react";
-import { FaYoutube, FaFile } from 'react-icons/fa';
+import { FaYoutube, FaFile, FaStar } from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Draggable } from "../../atoms/draggable";
@@ -26,6 +26,7 @@ const aStyle = {
 
 export function Social({
   icon,
+  isEditing,
   isDraggable,
   containerProps,
   data: { content, link, title, fallbackLink, id }
@@ -35,7 +36,7 @@ export function Social({
     [SocialIcon.Discord, BsDiscord],
     [SocialIcon.Instagram, AiFillInstagram],
     [SocialIcon.TikTok, BsTiktok],
-    [SocialIcon.File, FaFile],
+    [SocialIcon.File, FaStar],
   ])
 
   const NormalComponent = (
@@ -51,7 +52,7 @@ export function Social({
           style={aStyle}
           { ...(!isDraggable ? { href: link } : {})}
         >
-          <Box>
+          <Box pr="2">
             <Text color="gray.600" fontSize="sm">{title}</Text>
             <Text fontSize="sm" mt="1" opacity={0.7}>{content}</Text>
           </Box>

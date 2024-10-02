@@ -2,11 +2,11 @@ import { FlexProps } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 export enum SocialIcon {
-  YouTube = 'youtube',
-  Instagram = 'instagram',
-  TikTok = 'tiktok',
-  Discord = 'discord',
-  File = 'file',
+  YouTube = 'YouTube',
+  Instagram = 'Instagram',
+  TikTok = 'TikTok',
+  Discord = 'Discord',
+  File = 'File',
 }
 
 export class SocialData {
@@ -23,6 +23,7 @@ export class SocialData {
 };
 
 export interface SocialProps {
+  isEditing?: boolean;
   containerProps?: FlexProps;
   icon: SocialIcon;
   isDraggable?: boolean;

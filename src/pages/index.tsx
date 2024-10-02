@@ -81,9 +81,16 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const elemets = await prismaClient.elements.findMany({ where: { location: Location.BR } });
+  const page = await prismaClient.pages.findFirst({
+    where: {
+      slug: 'home',
+    },
+    include: {
+      elements: true,
+    }
+  });
 
-  const formatted = elemets.map(({ order, type, data }) => ({
+  const formatted = page?.elements.map(({ order, type, data }) => ({
     id: order,
     type,
     ...formatJSON(data),
@@ -91,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      elements: formatJSON(formatted),
+      elements: formatJSON(formatted ?? []),
     }
   }
 }

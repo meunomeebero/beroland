@@ -21,6 +21,7 @@
     "@trendyol-js/react-carousel": "^3.0.2",
     "3d-react-carousal": "^5.0.0",
     "axios": "^0.27.2",
+    "bcrypt": "^5.1.1",
     "date-fns": "^2.30.0",
     "filereader": "^0.10.3",
     "formidable": "^3.5.1",
