@@ -12,7 +12,7 @@ const flexStyled = {
   }
 }
 
-export function Affiliate({ data: { link, title, highlight, image, id }, isDraggable}) {
+export function Affiliate({ data: { link, text, highlight, image, id }, isDraggable}) {
   const Component = (
     <a href={!isDraggable && link} style={{ width: '100%' }}>
       <ElementContainer
@@ -27,12 +27,12 @@ export function Affiliate({ data: { link, title, highlight, image, id }, isDragg
         <Flex w="100%" align="center" justify="center">
           <Avatar src={image} w="100px" h="100px" bg="#000"/>
           <Icon as={FaPlus} color="green.400" mx="4"/>
-          <Avatar src="/static/bero-fofo.png" w="100px" h="100px" bg="#000"/>
+          <Avatar src="https://yt3.googleusercontent.com/re0UGxLR4RaxWtYgipEg6qmMMr_1AaeKFhHYbncqEWwJuAns4NsXWCMAMKX9QysrsHhWiVbEbw=s160-c-k-c0x00ffffff-no-rj" w="100px" h="100px" bg="#000"/>
         </Flex>
         <Flex w="100%" align="center" justify="center">
           <Flex direction="column" align="center" justify="center" w="70%" textAlign="center">
             <Text color="gray.500" fontSize="lg" fontWeight="bold" >
-              {title}
+              {text}
               <span
                 style={{
                   background: dracula.BackgroundPrimary,

@@ -22,6 +22,8 @@ import { EditHead } from "../../components/atoms/edit-head";
 import { ContentType, Elements } from "@prisma/client";
 import { SocialIcon } from "../../components/organisms/social/social";
 import { CreateElementParams } from "../api/elements";
+import { CreateSocial } from "../../components/organisms/create-social";
+import { CreateContent } from "../../components/templates/create-content";
 
 function formatElements(elements: Elements[]) {
   return elements.map(({ order, type, data, id }) => ({
@@ -34,7 +36,7 @@ function formatElements(elements: Elements[]) {
 
 export default function Home({ elements, slug }: { elements: Array<{ id: number, type: any, dbId: number }>, slug: string }) {
   const [title, setTitle] = useState(slug);
-
+  const [component, setComponent] = useState("SOCIAL");
   const [items, setItems] = useState(elements.sort((a, b) => a.id - b.id));
 
   const sensors = useSensors(
@@ -71,36 +73,6 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
     debounce(100, saveToDB)
   }, [items]);
 
-  const handleCreateElement = useCallback(async (formEvent: FormEvent<HTMLFormElement>) => {
-    formEvent.preventDefault();
-
-    const eventData = formEvent.target as any;
-
-    const data = {
-      title: eventData.title.value,
-      link: eventData.link.value,
-      content: eventData.content.value,
-      icon: eventData.icon.value,
-      component: eventData.component.value,
-    };
-
-    const createElementParams: CreateElementParams = {
-      type: data.component,
-      data,
-      order: items.length,
-      pageSlug: title
-    }
-
-    try {
-      const { data } = await axios.post('/api/elements', createElementParams);
-
-      setItems(items => [...formatElements([data]), ...items]);
-    } catch (err) {
-      alert(err)
-    }
-
-  }, [title, items]);
-
   return (
     <>
       <EditHead title={title} />
@@ -136,68 +108,18 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
               </Button>
             </Flex>
           </Box>
-
-          <form action="submit" onSubmit={handleCreateElement}>
-            <Stack spacing="4" alignItems="center" mb="6" w={656}>
-              <Select id="component" variant='flushed' placeholder='Componente' padding={1} onChange={console.log}>
-                {Object.keys(ContentType).map((key) => (
-                  <option key={key} value={key}>{key}</option>
-                ))}
-              </Select>
-
-              <Input
-                variant="unstyled"
-                w="100%"
-                type="text"
-                name="title"
-                id="title"
-                autoComplete="true"
-                borderRadius="0"
-                bg="gray.800"
-                placeholder="Título"
-                py="2"
-                px="4"
-              />
-              <Input
-                variant="unstyled"
-                w="100%"
-                type="url"
-                name="link"
-                id="link"
-                autoComplete="true"
-                borderRadius="0"
-                bg="gray.800"
-                placeholder="Link"
-                py="2"
-                px="4"
-              />
-              <Input
-                variant="unstyled"
-                w="100%"
-                type="text"
-                name="content"
-                id="content"
-                autoComplete="true"
-                borderRadius="0"
-                bg="gray.800"
-                placeholder="Conteúdo"
-                py="2"
-                px="4"
-              />
-              <Select id="icon" variant='flushed' placeholder='Icone' padding={1} onChange={console.log}>
-                {Object.keys(SocialIcon).map((key) => (
-                  <option key={key} value={key}>{key}</option>
-                ))}
-              </Select>
-              <Button variant="solid" w="100%" borderRadius="0" type="submit">
-                <Text color="gray.600" fontWeight="bold">
-                  Confirmar
-                </Text>
-              </Button>
-              </Stack>
-          </form>
-
-
+          <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)}>
+            {Object.keys(ContentType).map((key) => (
+              <option key={key} value={key}>{key}</option>
+            ))}
+          </Select>
+          <CreateContent
+            type={component}
+            items={items}
+            setItems={setItems}
+            title={title}
+            component={component}
+          />
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
