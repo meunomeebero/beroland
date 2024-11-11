@@ -29,7 +29,7 @@ export function Social({
   isEditing,
   isDraggable,
   containerProps,
-  data: { content, link, title, fallbackLink, id, isDeleting }
+  data: { content, link, title, fallbackLink, id }
 }: SocialProps) {
   const iconMap = new Map([
     [SocialIcon.YouTube, FaYoutube],
