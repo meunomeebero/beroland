@@ -1,6 +1,7 @@
 * {
   max-width: 100vw;
   font-family: "Nunito", sans-serif;
+  --webkit-font-smoothing: antialiased;
 
   &::-webkit-scrollbar {
     width: 5px;

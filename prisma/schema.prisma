@@ -13,6 +13,7 @@ enum ContentType {
   AFFILIATE
   SECTION
   BANNER
+  TEXT
 }
 
 model Elements {

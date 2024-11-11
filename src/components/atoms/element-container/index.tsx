@@ -23,10 +23,10 @@ export function ElementContainer({
       as={ChakraDiv}
       p="4"
       bg="gray.800"
-      borderRadius="lg"
+      borderRadius="md"
       minH={counterSize.minH}
       w="100%"
-      maxW={656}
+      maxW={598}
       transition="initial"
       {...(containerUp)}
       {...props}

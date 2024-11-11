@@ -1,16 +1,15 @@
-import { Box } from "@chakra-ui/react";
 import { Draggable } from "../../atoms/draggable";
-import { Title } from "../../atoms/title";
+import { Box, Text as CText} from "@chakra-ui/react"
 
-export function Section({
+export function Text({
   isDraggable,
   data: { id, title }
 }) {
   const NormalComponent = (
     <Box w="100%" mr="auto">
-      <Title>
+      <CText color="gray.50" fontWeight="medium" fontSize="xl" w="80%">
         {title}
-      </Title>
+      </CText>
     </Box>
   );
 

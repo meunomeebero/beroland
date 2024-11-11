@@ -1,22 +1,31 @@
 import { Box, Button, Divider, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useCallback, useState } from "react";
+import { dracula } from "../../../styles/theme";
+import { Span } from "../../atoms/span";
 import { Title } from "../../atoms/title";
 
-export function NewsLetter({ location }) {
+export function Lead({ location }) {
   const [email, setEmail] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const handleSubmit = useCallback(async () => {
+    setIsLoading(true);
+
     if (!email) {
+      setIsLoading(false);
       return toast({ title: 'Você precisa preencher seu email' })
     }
 
     try {
       await axios.post('/api/leads', { email, location });
       toast({ title: 'Email cadastrado', status: 'success' })
+      setIsLoading(false);
     } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+
       if (err.request.status === 409) {
         return toast({ title:'Email já cadastrado', status: 'warning' });
       }
@@ -28,9 +37,16 @@ export function NewsLetter({ location }) {
   return (
     <Box w="100%">
       <Title>
-        🔥 Receba dicas e novidades pelo email 🔥
+        Adicione seu
+        <Span color={dracula.CurrentLine}>
+          email
+        </Span>
+        e recebea desconto e acessso antecipado ao
+        <Span color={dracula.CurrentLine}>
+          Do Zero ao GP
+        </Span>
       </Title>
-      <Flex w="100%">
+      <Flex w="100%" pt="2">
         <Input
           variant="unstyled"
           w="60%"
@@ -47,7 +63,7 @@ export function NewsLetter({ location }) {
         />
         <Button variant="solid" w="40%" borderRadius="0" onClick={handleSubmit}>
           <Text color="gray.600" fontWeight="bold">
-            Confirmar
+            {isLoading ? 'Enviando...' : 'Confirmar'}
           </Text>
         </Button>
       </Flex>

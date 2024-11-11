@@ -12,7 +12,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { Content } from "../components/templates/content";
-import { NewsLetter } from "../components/molecules/newsletter";
+import { Lead } from "../components/molecules/lead";
 import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";
 import { GetServerSideProps } from "next";
@@ -52,7 +52,7 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
         <Bio pt="8" pb="0" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
-        <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={656}>
+        <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={598}>
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -72,7 +72,7 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
               ))}
             </SortableContext>
           </DndContext>
-          <NewsLetter location={Location.BR}/>
+          <Lead location={Location.BR}/>
           </Stack>
         </MainContainer>
       </Flex>

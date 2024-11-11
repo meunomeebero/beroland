@@ -24,9 +24,9 @@ export function Bio({ showLinks, ...data}: BioProps) {
       bgPosition={`center ${offsetY * 0.5}px`}
       bgAttachment="fixed"
     >
-      <Flex position="relative">
+      <Flex position="relative" w="200px">
         <Avatar
-          size="xl"
+          size="full"
           name={"Roberto Junior"}
           src={"/static/bero.png"}
           bg="#000"

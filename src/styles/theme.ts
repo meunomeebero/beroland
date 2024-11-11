@@ -72,7 +72,8 @@ export const theme = extendTheme({
       50: dracula.Foreground,
     },
     pink: {
-      400: dracula.Pink
+      400: dracula.Pink,
+      300: 'rgb(43, 36, 49)',
     },
     purple: {
       400: dracula.Purple,

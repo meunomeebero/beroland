@@ -29,7 +29,7 @@ export function Social({
   isEditing,
   isDraggable,
   containerProps,
-  data: { content, link, title, fallbackLink, id }
+  data: { content, link, title, fallbackLink, id, isDeleting }
 }: SocialProps) {
   const iconMap = new Map([
     [SocialIcon.YouTube, FaYoutube],
@@ -46,6 +46,7 @@ export function Social({
       cursor={!isDraggable && "pointer"}
       {...containerProps}
       {...flexStyled}
+      bg="pink.300"
     >
       <Flex h="100%">
         <a
@@ -53,8 +54,8 @@ export function Social({
           { ...(!isDraggable ? { href: link } : {})}
         >
           <Box pr="2">
-            <Text color="gray.600" fontSize="sm">{title}</Text>
-            <Text fontSize="sm" mt="1" opacity={0.7}>{content}</Text>
+            <Text color="pink.400" fontWeight="bold" opacity={0.4} fontSize="lg">{title}</Text>
+            <Text fontStyle="italic" fontSize="md" mt="1" fontWeight="medium" opacity={0.8}>{content}</Text>
           </Box>
           <Icon as={iconMap.get(icon)} w="6" h="6" color="pink.400"/>
         </a>

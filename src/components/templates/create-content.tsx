@@ -20,6 +20,8 @@ export function CreateContent(props) {
       return <CreateSection {...props}/>
     case ContentType.BANNER:
       return <Banner {...props}/>
+    case ContentType.TEXT:
+      return <CreateSection {...props}/>
     default:
       return <></>;
   }

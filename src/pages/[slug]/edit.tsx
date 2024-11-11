@@ -1,6 +1,5 @@
-import { Box, Button, Flex, Input, Select, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input, Select, Stack, Text } from "@chakra-ui/react";
 import { MainContainer } from "../../components/atoms/main-container";
-import { FeedHead as Head } from "../../components/atoms/feed-head";
 import { Bio } from "../../components/organisms/bio";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import Confetti from 'react-confetti-boom';
@@ -20,10 +19,8 @@ import { debounce } from "../../utils/debounce";
 import { Title } from "../../components/atoms/title";
 import { EditHead } from "../../components/atoms/edit-head";
 import { ContentType, Elements } from "@prisma/client";
-import { SocialIcon } from "../../components/organisms/social/social";
-import { CreateElementParams } from "../api/elements";
-import { CreateSocial } from "../../components/organisms/create-social";
 import { CreateContent } from "../../components/templates/create-content";
+import { FaTrash } from "react-icons/fa"
 
 function formatElements(elements: Elements[]) {
   return elements.map(({ order, type, data, id }) => ({
@@ -35,9 +32,9 @@ function formatElements(elements: Elements[]) {
 }
 
 export default function Home({ elements, slug }: { elements: Array<{ id: number, type: any, dbId: number }>, slug: string }) {
-  const [title, setTitle] = useState(slug);
   const [component, setComponent] = useState("SOCIAL");
   const [items, setItems] = useState(elements.sort((a, b) => a.id - b.id));
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -75,39 +72,12 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
 
   return (
     <>
-      <EditHead title={title} />
+      <EditHead title={slug} />
       <Flex direction="column"  w="100vw" align="center" justify="center">
         <Bio p="8" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
-        <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={656}>
-          <Box w="100%">
-            <Title>
-              Título da pagina
-            </Title>
-            <Flex w="100%">
-              <Input
-                variant="unstyled"
-                w="60%"
-                type="text"
-                name="title"
-                id="title"
-                autoComplete="true"
-                borderRadius="0"
-                bg="gray.800"
-                placeholder="Título"
-                value={title}
-                onChange={e => debounce(1000, () => setTitle(e.target.value))}
-                py="2"
-                px="4"
-              />
-              <Button variant="solid" w="40%" borderRadius="0" onClick={console.log}>
-                <Text color="gray.600" fontWeight="bold">
-                  Confirmar
-                </Text>
-              </Button>
-            </Flex>
-          </Box>
+        <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={598}>
           <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)}>
             {Object.keys(ContentType).map((key) => (
               <option key={key} value={key}>{key}</option>
@@ -117,19 +87,41 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
             type={component}
             items={items}
             setItems={setItems}
-            title={title}
+            title={slug}
             component={component}
           />
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext
-              items={items}
-              strategy={verticalListSortingStrategy}
+          <Flex p="4" bg="gray.800" borderRadius="4" align="center" justify="center">
+            <Icon as={FaTrash} color="purple.400"/>
+            <Text pl="4">
+              Deletar
+            </Text>
+          </Flex>
+          { !isDeleting ? (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
             >
-              {items.map(si => (
+              <SortableContext
+                items={items}
+                strategy={verticalListSortingStrategy}
+              >
+                {items.map(si => (
+                  <Content
+                    isDeleting
+                    isEditing
+                    type={si.type}
+                    key={si.id}
+                    isDraggable
+                    data={si}
+                    {...si}
+                  />
+                ))}
+              </SortableContext>
+            </DndContext>
+          ): (
+            <>
+              {items.map(si =>
                 <Content
                   isEditing
                   type={si.type}
@@ -138,9 +130,9 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
                   data={si}
                   {...si}
                 />
-              ))}
-            </SortableContext>
-          </DndContext>
+              )}
+            </>
+          )}
           </Stack>
         </MainContainer>
       </Flex>

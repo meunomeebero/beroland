@@ -27,5 +27,6 @@ export interface SocialProps {
   containerProps?: FlexProps;
   icon: SocialIcon;
   isDraggable?: boolean;
+  isDeleting?: boolean;
   data: SocialData;
 }
