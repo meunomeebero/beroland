@@ -34,7 +34,7 @@ export function CreateIframe({ items, setItems, title, component }) {
 
   return (
     <form action="submit" onSubmit={handleCreateElement}>
-      <Stack spacing="4" alignItems="center" mb="6" w={598}>
+      <Stack spacing="4" alignItems="center" mb="6" w={578}>
         <Input
           variant="unstyled"
           w="100%"
@@ -48,7 +48,7 @@ export function CreateIframe({ items, setItems, title, component }) {
           py="2"
           px="4"
         />
-        <Button variant="solid" w="100%" borderRadius="0" type="submit">
+        <Button variant="solid" w="100%" borderRadius="md" type="submit">
           <Text color="gray.600" fontWeight="bold">
             Confirmar
           </Text>

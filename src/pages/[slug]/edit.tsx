@@ -1,7 +1,7 @@
-import { Box, Button, Flex, Icon, Input, Select, Stack, Text } from "@chakra-ui/react";
+import { Flex, Icon, Select, Stack, Text } from "@chakra-ui/react";
 import { MainContainer } from "../../components/atoms/main-container";
 import { Bio } from "../../components/organisms/bio";
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from 'react-confetti-boom';
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import {
@@ -16,7 +16,6 @@ import { formatJSON } from "../../utils/format-json";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import { debounce } from "../../utils/debounce";
-import { Title } from "../../components/atoms/title";
 import { EditHead } from "../../components/atoms/edit-head";
 import { ContentType, Elements } from "@prisma/client";
 import { CreateContent } from "../../components/templates/create-content";
@@ -78,23 +77,27 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
         <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={598}>
-          <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)}>
-            {Object.keys(ContentType).map((key) => (
-              <option key={key} value={key}>{key}</option>
-            ))}
-          </Select>
-          <CreateContent
-            type={component}
-            items={items}
-            setItems={setItems}
-            title={slug}
-            component={component}
-          />
-          <Flex p="4" bg="gray.800" borderRadius="4" align="center" justify="center">
-            <Icon as={FaTrash} color="purple.400"/>
-            <Text pl="4">
-              Deletar
-            </Text>
+          <Flex align="center" justify="center" direction="column" p="14px" bg="gray.800" borderRadius="lg">
+            <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)} mb="4">
+              {Object.keys(ContentType).map((key) => (
+                <option key={key} value={key}>{key}</option>
+              ))}
+            </Select>
+            <CreateContent
+              type={component}
+              items={items}
+              setItems={setItems}
+              title={slug}
+              component={component}
+            />
+          </Flex>
+          <Flex w="100%">
+            <Flex p="4" bg="gray.800" borderRadius="4" align="center" justify="center" mr="auto">
+              <Icon as={FaTrash} color="purple.400"/>
+              <Text pl="4">
+                Deletar
+              </Text>
+            </Flex>
           </Flex>
           { !isDeleting ? (
             <DndContext

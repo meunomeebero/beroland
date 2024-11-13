@@ -34,14 +34,13 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    // Apenas rola a página se ainda não rolou
     if (!hasScrolled) {
       setTimeout(() => {
         window.scrollTo({
           top: document.documentElement.scrollHeight,
           behavior: 'smooth'
         });
-        setHasScrolled(true); // Marca como rolado
+        setHasScrolled(true);
       }, 100);
     }
   }, [hasScrolled]);

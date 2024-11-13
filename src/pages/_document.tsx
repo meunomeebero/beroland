@@ -11,7 +11,10 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/static/favicon.png" sizes='96x96' type="image/png" />
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='anonymous'/>
-          <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body style={{ overflowX: 'hidden' }}>
           <ColorModeScript initialColorMode="dark" />

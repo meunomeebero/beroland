@@ -1,12 +1,9 @@
-import { Affiliate } from "../organisms/affiliate";
 import { Banner } from "../organisms/banner";
 import { CreateAffiliate } from "../organisms/create-affiliate";
 import { CreateIframe } from "../organisms/create-iframe";
 import { CreateSection } from "../organisms/create-section";
 import { CreateSocial } from "../organisms/create-social";
 import { CreateText } from "../organisms/create-text";
-import { Section } from "../organisms/section";
-import { YoutubeIframe } from "../organisms/youtube-iframe";
 import { ContentType } from "./content";
 
 export function CreateContent(props) {
@@ -19,8 +16,6 @@ export function CreateContent(props) {
       return <CreateAffiliate {...props}/>
     case ContentType.Section:
       return <CreateSection {...props}/>
-    case ContentType.BANNER:
-      return <Banner {...props}/>
     case ContentType.TEXT:
       return <CreateText {...props}/>
     default:
