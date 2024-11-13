@@ -41,10 +41,12 @@ async function createElement({ pageSlug, ...element }: CreateElementParams) {
   return created;
 }
 
-async function deleteElement(id: number) {
-  await prismaClient.elements.delete({
+async function deleteElements(id: number[]) {
+  await prismaClient.elements.deleteMany({
     where: {
-      id,
+      id: {
+        in: id,
+      }
     }
   });
 }
@@ -74,9 +76,9 @@ const handler: Handler = async (req, res) => {
   if (req.method === 'DELETE') {
     const {
       id,
-    } = req.body;
+    } = req.query;
 
-    await deleteElement(id);
+    await deleteElements([Number(id)]);
 
     return res.json({ ok: true });
   }

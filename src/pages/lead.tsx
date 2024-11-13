@@ -1,8 +1,8 @@
-import { Flex, Stack } from "@chakra-ui/react";
+import Confetti from 'react-confetti-boom';
+import { Flex } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
-import Confetti from 'react-confetti-boom';
 import { Lead } from "../components/molecules/lead";
 import { Location } from "@prisma/client";
 

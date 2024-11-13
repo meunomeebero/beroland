@@ -50,7 +50,7 @@ export function CreateSocial({ items, setItems, title, component }) {
           bg="gray.800"
           placeholder="Título"
           py="2"
-          px="4"
+          px="2"
         />
         <Input
           variant="unstyled"
@@ -63,7 +63,7 @@ export function CreateSocial({ items, setItems, title, component }) {
           bg="gray.800"
           placeholder="Link"
           py="2"
-          px="4"
+          px="2"
         />
         <Input
           variant="unstyled"
@@ -76,7 +76,7 @@ export function CreateSocial({ items, setItems, title, component }) {
           bg="gray.800"
           placeholder="Conteúdo"
           py="2"
-          px="4"
+          px="2"
         />
         <Select id="icon" variant='flushed' placeholder='Icone' padding={1}>
           {Object.keys(SocialIcon).map((key) => (

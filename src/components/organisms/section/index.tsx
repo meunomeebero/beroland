@@ -23,7 +23,7 @@ export function Section({
 
 
   const NormalComponent = (
-    <Box w="100%" mr="auto">
+    <Box w="100%" mr="auto" my="2">
       <Title>
         {formattedTitle}
       </Title>

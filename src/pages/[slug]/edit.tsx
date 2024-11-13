@@ -1,4 +1,4 @@
-import { Flex, Icon, Select, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Icon, Select, Stack, Text } from "@chakra-ui/react";
 import { MainContainer } from "../../components/atoms/main-container";
 import { Bio } from "../../components/organisms/bio";
 import { useEffect, useState } from "react";
@@ -92,12 +92,12 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
             />
           </Flex>
           <Flex w="100%">
-            <Flex p="4" bg="gray.800" borderRadius="4" align="center" justify="center" mr="auto">
+            <Button p="7" bg={isDeleting ? "gray.700":"gray.800"} borderRadius="md" onClick={() => setIsDeleting(state => !state)}>
               <Icon as={FaTrash} color="purple.400"/>
-              <Text pl="4">
+              <Text pl="4" fontWeight="bold">
                 Deletar
               </Text>
-            </Flex>
+            </Button>
           </Flex>
           { !isDeleting ? (
             <DndContext
@@ -111,11 +111,12 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
               >
                 {items.map(si => (
                   <Content
-                    isDeleting
+                    isDeleting={isDeleting}
                     isEditing
                     type={si.type}
                     key={si.id}
                     isDraggable
+                    reload={setItems}
                     data={si}
                     {...si}
                   />
@@ -126,8 +127,10 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
             <>
               {items.map(si =>
                 <Content
+                  isDeleting={isDeleting}
                   isEditing
                   type={si.type}
+                  reload={() => setItems(items.filter(i => i.id !== si.id))}
                   key={si.id}
                   isDraggable
                   data={si}
