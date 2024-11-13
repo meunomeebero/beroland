@@ -1,8 +1,8 @@
-import { Flex, Stack } from "@chakra-ui/react";
+import { Divider, Flex, Stack, Text } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from 'react-confetti-boom';
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import {
@@ -17,6 +17,7 @@ import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";
 import { GetServerSideProps } from "next";
 import { Location } from "@prisma/client";
+import { Link } from "../components/atoms/link";
 
 export default function Home({ elements }: { elements: Array<{ id: number, type: any }> }) {
   const [items, setItems] = useState(
@@ -29,6 +30,22 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    // Apenas rola a página se ainda não rolou
+    if (!hasScrolled) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+        setHasScrolled(true); // Marca como rolado
+      }, 100);
+    }
+  }, [hasScrolled]);
+
 
   function handleDragEnd(event) {
     const { active, over } = event;
@@ -75,6 +92,12 @@ export default function Home({ elements }: { elements: Array<{ id: number, type:
           <Lead location={Location.BR}/>
           </Stack>
         </MainContainer>
+        <Divider/>
+        <Link href="https://www.instagram.com/meunomeebero" target="__blank">
+          <Text opacity={0.5}>
+            Feito pelo Bero com amor ❤️
+          </Text>
+        </Link>
       </Flex>
     </>
   );

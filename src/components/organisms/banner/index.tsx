@@ -9,7 +9,7 @@ export function Banner({ data: { id, imageURL, url }, isDraggable}) {
 
   useEffect(() => {
     function handleResize() {
-      const width = window.innerWidth > 656 ? 656 : window.innerWidth - 32;
+      const width = window.innerWidth > 598 ? 598 : window.innerWidth - 32;
       const height = width * 0.5625;
       setIframeSize({ width, height });
     }

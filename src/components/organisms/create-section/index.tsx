@@ -34,7 +34,7 @@ export function CreateSection({ items, setItems, title, component }) {
 
   return (
     <form action="submit" onSubmit={handleCreateElement}>
-      <Stack spacing="4" alignItems="center" mb="6" w={656}>
+      <Stack spacing="4" alignItems="center" mb="6" w={598}>
         <Input
           variant="unstyled"
           w="100%"

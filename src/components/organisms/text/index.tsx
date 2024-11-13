@@ -3,12 +3,12 @@ import { Box, Text as CText} from "@chakra-ui/react"
 
 export function Text({
   isDraggable,
-  data: { id, title }
+  data: { id, text, title }
 }) {
   const NormalComponent = (
     <Box w="100%" mr="auto">
       <CText color="gray.50" fontWeight="medium" fontSize="xl" w="80%">
-        {title}
+        {text ?? title}
       </CText>
     </Box>
   );
