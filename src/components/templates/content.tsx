@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Affiliate } from "../organisms/affiliate";
 import { Banner } from "../organisms/banner";
+import { Divider } from "../organisms/divider";
 import { Section } from "../organisms/section";
 import { Social } from "../organisms/social"
 import { Text } from "../organisms/text";
@@ -16,6 +17,7 @@ export enum ContentType {
   Section = 'SECTION',
   BANNER = "BANNER",
   TEXT = 'TEXT',
+  DIVIDER = 'DIVIDER',
 }
 
 export function Content(props) {
@@ -38,6 +40,8 @@ export function Content(props) {
         return <Banner {...props}/>
       case ContentType.TEXT:
           return <Text {...props}/>
+      case ContentType.DIVIDER:
+        return <Divider {...props}/>
       default:
         return;
     }

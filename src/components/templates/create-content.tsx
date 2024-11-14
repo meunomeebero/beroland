@@ -1,5 +1,6 @@
 import { Banner } from "../organisms/banner";
 import { CreateAffiliate } from "../organisms/create-affiliate";
+import { CreateDivider } from "../organisms/create-divider";
 import { CreateIframe } from "../organisms/create-iframe";
 import { CreateSection } from "../organisms/create-section";
 import { CreateSocial } from "../organisms/create-social";
@@ -18,6 +19,8 @@ export function CreateContent(props) {
       return <CreateSection {...props}/>
     case ContentType.TEXT:
       return <CreateText {...props}/>
+    case ContentType.DIVIDER:
+      return <CreateDivider {...props}/>
     default:
       return <></>;
   }
