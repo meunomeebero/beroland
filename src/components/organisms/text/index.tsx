@@ -7,7 +7,7 @@ export function Text({
 }) {
   const NormalComponent = (
     <Box w="100%" mr="auto">
-      <CText color="gray.50" fontWeight="medium" fontSize="xl">
+      <CText color="gray.50" fontWeight="md" fontSize="lg">
         {text ?? title}
       </CText>
     </Box>
