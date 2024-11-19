@@ -3,7 +3,7 @@ import { ElementContainer } from "../../atoms/element-container";
 import { SocialIcon, SocialProps } from "./social";
 import { dracula } from "../../../styles/theme";
 import { useCallback } from "react";
-import { FaYoutube, FaFile, FaStar } from 'react-icons/fa';
+import { FaYoutube, FaStar } from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Draggable } from "../../atoms/draggable";
@@ -39,6 +39,12 @@ export function Social({
     [SocialIcon.File, FaStar],
   ])
 
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    window?.["datafast"](`click:${link}`, { description: "Someone clicked on the link" });
+    window.open(link, '_blank');
+  }, [link]);
+
   const NormalComponent = (
     <ElementContainer
       size="sm"
@@ -51,7 +57,8 @@ export function Social({
       <Flex h="100%">
         <a
           style={aStyle}
-          { ...(!isDraggable ? { href: link } : {})}
+          href={!isDraggable ? link : undefined}
+          onClick={!isDraggable ? handleClick : undefined}
         >
           <Box pr="2">
             <Text color="pink.400" fontWeight="bold" opacity={0.4} fontSize="lg">{title}</Text>
