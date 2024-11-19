@@ -41,9 +41,9 @@ export function Social({
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    window?.["datafast"](`click_${link}`, { description: "Someone clicked on the link" });
+    window?.["datafast"](`click_${id}`, { description: `Someone clicked on the link ${link}` });
     window.open(link, '_blank');
-  }, [link]);
+  }, [link, id]);
 
   const NormalComponent = (
     <ElementContainer
