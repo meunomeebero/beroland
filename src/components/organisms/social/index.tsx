@@ -41,7 +41,7 @@ export function Social({
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    window?.["datafast"](`click:${link}`, { description: "Someone clicked on the link" });
+    window?.["datafast"](`click_${link}`, { description: "Someone clicked on the link" });
     window.open(link, '_blank');
   }, [link]);
 
