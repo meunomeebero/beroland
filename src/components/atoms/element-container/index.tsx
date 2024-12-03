@@ -21,7 +21,6 @@ export function ElementContainer({
   return (
     <Flex
       as={ChakraDiv}
-      p="4"
       bg="gray.800"
       borderRadius="md"
       minH={counterSize.minH}
@@ -32,7 +31,7 @@ export function ElementContainer({
       {...props}
     >
       {rightSide && rightSide}
-      <Stack width="100%" spacing="4" ml={["0", "4"]} overflow="hidden" px="4" {...stackProps}>
+      <Stack width="100%" spacing="4"  overflow="hidden" {...stackProps}>
         {children}
       </Stack>
       {leftSide && leftSide}

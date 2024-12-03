@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 
 export const dracula = {
+  BackgroundDarker: '#181818',
   BackgroundPrimary: '#1d1e26',
   BackgroundSecondary:	'#282a36',
   CurrentLine: '#44475a',
@@ -65,6 +66,7 @@ export const theme = extendTheme({
   },
   colors: {
     gray: {
+      950: dracula.BackgroundDarker,
       900: dracula.BackgroundPrimary,
       800: dracula.BackgroundSecondary,
       700: dracula.CurrentLine,

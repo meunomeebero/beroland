@@ -48,11 +48,9 @@ export function Social({
   const NormalComponent = (
     <ElementContainer
       size="sm"
-      stackProps={{ padding: '0 1rem', margin: '0', ml: '0' }}
       cursor={!isDraggable && "pointer"}
-      {...containerProps}
-      {...flexStyled}
-      bg="pink.300"
+      // bg="pink.300"
+      bg="gray.900"
     >
       <Flex h="100%">
         <a
@@ -60,7 +58,7 @@ export function Social({
           href={!isDraggable ? link : undefined}
           onClick={!isDraggable ? handleClick : undefined}
         >
-          <Box pr="2">
+          <Box pr="4">
             <Text color="pink.400" fontWeight="bold" opacity={0.4} fontSize="lg">{title}</Text>
             <Text fontStyle="italic" fontSize="md" mt="1" fontWeight="medium" opacity={0.8}>{content}</Text>
           </Box>
