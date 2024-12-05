@@ -1,26 +1,53 @@
 import Confetti from 'react-confetti-boom';
-import { Divider, Flex, Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Input, VStack, Text } from "@chakra-ui/react";
+import { Divider, Flex, Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Input, VStack, Text, useToast } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Content } from "../components/templates/content";
 import { prismaClient } from "./api/_prisma";
 import { formatJSON } from "../utils/format-json";
 import { GetServerSideProps } from "next";
 import { Footer } from "../components/organisms/footer";
+import axios from 'axios';
+import { Location } from '@prisma/client';
 
 export default function Home({ elements }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
+
   const items = useMemo(() => {
     return elements.sort((a, b) => a.id - b.id)
   }, [elements]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your email submission logic here
-    setIsOpen(false);
-  };
+
+    const email = e.currentTarget?.email?.value;
+
+    if (!email) {
+      return toast({ title: 'Você precisa preencher seu email' })
+    }
+
+    setIsLoading(true);
+
+    try {
+      await axios.post('/api/leads', { email, location: Location.BR });
+      toast({ title: 'Email cadastrado', status: 'success' })
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+
+      if (err.request.status === 409) {
+        return toast({ title:'Email já cadastrado', status: 'warning' });
+      }
+
+      toast({ title:'Falha ao cadastrar email', status: 'error' })
+    }
+  }, [toast]);
+
 
   return (
     <>
@@ -76,9 +103,10 @@ export default function Home({ elements }) {
                 <Input
                   placeholder="Seu melhor e-mail"
                   type="email"
+                  name="email"
                   required
                 />
-                <Button type="submit" width="full" bg="pink.400" _hover={{ bg: "pink.500" }}>
+                <Button type="submit" width="full" bg="pink.400" _hover={{ bg: "pink.500" }} isLoading={isLoading}>
                   Enviar
                 </Button>
               </VStack>

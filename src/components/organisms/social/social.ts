@@ -6,6 +6,7 @@ export enum SocialIcon {
   Instagram = 'Instagram',
   TikTok = 'TikTok',
   Discord = 'Discord',
+  Twitter = 'Twitter',
   File = 'File',
 }
 

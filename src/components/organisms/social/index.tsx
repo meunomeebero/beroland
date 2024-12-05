@@ -3,7 +3,7 @@ import { ElementContainer } from "../../atoms/element-container";
 import { SocialIcon, SocialProps } from "./social";
 import { dracula } from "../../../styles/theme";
 import { useCallback } from "react";
-import { FaYoutube, FaStar } from 'react-icons/fa';
+import { FaYoutube, FaStar, FaTwitter } from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Draggable } from "../../atoms/draggable";
@@ -37,6 +37,7 @@ export function Social({
     [SocialIcon.Instagram, AiFillInstagram],
     [SocialIcon.TikTok, BsTiktok],
     [SocialIcon.File, FaStar],
+    [SocialIcon.Twitter, FaTwitter],
   ])
 
   const handleClick = useCallback((e: React.MouseEvent) => {
