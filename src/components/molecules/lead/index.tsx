@@ -5,15 +5,17 @@ import { dracula } from "../../../styles/theme";
 import { Span } from "../../atoms/span";
 import { Title } from "../../atoms/title";
 
-export function Lead({ location }) {
+export function Lead({ location, setIsLoading }) {
   const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, _setIsLoading] = useState(false);
   const toast = useToast();
 
   const handleSubmit = useCallback(async () => {
+    _setIsLoading(true);
     setIsLoading(true);
 
     if (!email) {
+      _setIsLoading(false);
       setIsLoading(false);
       return toast({ title: 'Você precisa preencher seu email' })
     }
@@ -21,9 +23,11 @@ export function Lead({ location }) {
     try {
       await axios.post('/api/leads', { email, location });
       toast({ title: 'Email cadastrado', status: 'success' })
+      _setIsLoading(false);
       setIsLoading(false);
     } catch (err) {
       console.error(err);
+      _setIsLoading(false);
       setIsLoading(false);
 
       if (err.request.status === 409) {
@@ -32,12 +36,12 @@ export function Lead({ location }) {
 
       toast({ title:'Falha ao cadastrar email', status: 'error' })
     }
-  }, [email, toast, location]);
+  }, [email, toast, location, setIsLoading]);
 
   return (
     <Box w="100%">
       <Title>
-        Adicione seu
+        🛎️ Adicione seu
         <Span color={dracula.CurrentLine}>
           email
         </Span>
@@ -46,7 +50,7 @@ export function Lead({ location }) {
           Do Zero ao GP
         </Span>
       </Title>
-      <Flex w="100%" pt="2">
+      <Flex w="100%" pt="8">
         <Input
           variant="unstyled"
           w="60%"
