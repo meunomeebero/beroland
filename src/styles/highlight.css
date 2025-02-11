@@ -1,0 +1,194 @@
+/* Dracula Theme v1.2.5
+ *
+ * https://github.com/dracula/highlightjs
+ *
+ * Copyright 2016-present, All rights reserved
+ *
+ * Code licensed under the MIT license
+ *
+ * @author Denis Ciccale <dciccale@gmail.com>
+ * @author Zeno Rocha <hi@zenorocha.com>
+ */
+
+code {
+  background-color:#282a36;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 1rem !important;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+  background: #282a36;
+  border-radius: 1em;
+
+}
+
+.hljs-built_in,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-link {
+  color: #8be9fd;
+}
+
+.hljs-keyword {
+  color: #ff79c6;
+}
+
+.hljs,
+.hljs-subst {
+  color: #f8f8f2;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-meta-keyword {
+  font-style: italic;
+  color: #50fa7b;
+}
+
+.hljs-string,
+.hljs-meta,
+.hljs-name,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f1fa8c;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion {
+  color: #6272a4;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-literal,
+.hljs-number {
+  color: #bd93f9;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.markdown-content h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: var(--chakra-colors-gray-50);
+  line-height: 2rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0.75rem 0;
+  color: var(--chakra-colors-gray-50);
+}
+
+.markdown-content h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  color: var(--chakra-colors-gray-50);
+}
+
+.markdown-content p {
+  margin: 0.5rem 0;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.markdown-content li {
+  margin: 0.25rem 0;
+}
+
+.markdown-content strong {
+  font-weight: bold;
+  color: var(--chakra-colors-purple-400);
+}
+
+.markdown-content em {
+  font-style: italic;
+  color: var(--chakra-colors-purple-300);
+}
+
+.markdown-content a {
+  color: var(--chakra-colors-blue-400);
+  text-decoration: none;
+  border-bottom: 3px dotted var(--chakra-colors-blue-400);
+}
+
+.markdown-content a:hover {
+  color: var(--chakra-colors-blue-500);
+  border-bottom-color: var(--chakra-colors-blue-500);
+}
+
+.markdown-content {
+  background: var(--chakra-colors-gray-800);
+  padding: 1em;
+  border-radius: 0.5em;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1, "kern" 1;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+}
+
+.markdown-content * {
+  font-family: inherit;
+}
+
+.markdown-content pre {
+  background-color: var(--chakra-colors-gray-800);
+  padding: 0.1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.markdown-content code {
+  font-family: "Roboto Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  background-color: var(--chakra-colors-gray-800);
+  padding: 0.25rem;
+  border-radius: 0.125rem;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--chakra-colors-purple-400);
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+/* Code blocks should use monospace font */
+.markdown-content code,
+.markdown-content pre {
+  font-family: "Roboto Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}

@@ -15,6 +15,7 @@ enum ContentType {
   BANNER
   TEXT
   DIVIDER
+  MARKDOWN
 }
 
 model Elements {

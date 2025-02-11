@@ -5,6 +5,7 @@ import { CreateIframe } from "../organisms/create-iframe";
 import { CreateSection } from "../organisms/create-section";
 import { CreateSocial } from "../organisms/create-social";
 import { CreateText } from "../organisms/create-text";
+import { CreateMarkdown } from "../organisms/create-markdown";
 import { ContentType } from "./content";
 
 export function CreateContent(props) {
@@ -21,6 +22,8 @@ export function CreateContent(props) {
       return <CreateText {...props}/>
     case ContentType.DIVIDER:
       return <CreateDivider {...props}/>
+    case ContentType.MARKDOWN:
+      return <CreateMarkdown {...props}/>
     default:
       return <></>;
   }

@@ -9,6 +9,7 @@ import { Section } from "../organisms/section";
 import { Social } from "../organisms/social"
 import { Text } from "../organisms/text";
 import { YoutubeIframe } from "../organisms/youtube-iframe";
+import { Markdown } from "../organisms/markdown";
 
 export enum ContentType {
   Social = 'SOCIAL',
@@ -18,6 +19,7 @@ export enum ContentType {
   BANNER = "BANNER",
   TEXT = 'TEXT',
   DIVIDER = 'DIVIDER',
+  MARKDOWN = 'MARKDOWN',
 }
 
 export function Content(props) {
@@ -42,6 +44,8 @@ export function Content(props) {
           return <Text {...props}/>
       case ContentType.DIVIDER:
         return <Divider {...props}/>
+      case ContentType.MARKDOWN:
+        return <Markdown {...props}/>
       default:
         return;
     }

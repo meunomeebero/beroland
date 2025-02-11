@@ -2,7 +2,6 @@ import Confetti from 'react-confetti-boom';
 import { Flex, keyframes, Box } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
-import { Bio } from "../components/organisms/bio";
 import { Lead } from "../components/molecules/lead";
 import { Location } from "@prisma/client";
 import Image from 'next/image';

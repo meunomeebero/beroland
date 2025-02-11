@@ -5,8 +5,11 @@ import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
 import { Lead } from "../components/molecules/lead";
 import { Location } from "@prisma/client";
+import { useState } from "react";
 
 export default function LeadPage() {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
       <Head />
@@ -15,7 +18,7 @@ export default function LeadPage() {
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
         <Flex minW="320px" mb="6" maxW={598} align="center" justify="center">
-          <Lead location={Location.BR}/>
+          <Lead location={Location.BR} setIsLoading={setIsLoading}/>
         </Flex>
         </MainContainer>
       </Flex>

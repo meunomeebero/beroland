@@ -2,6 +2,7 @@ import { ChakraProvider} from "@chakra-ui/react"
 import { theme } from "../styles/theme"
 import { QueryClient, QueryClientProvider } from "react-query";
 import './styles.scss';
+import '../styles/highlight.css';
 
 const queryClient = new QueryClient();
 
