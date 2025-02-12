@@ -20,15 +20,7 @@ import { EditHead } from "../../components/atoms/edit-head";
 import { ContentType, Elements } from "@prisma/client";
 import { CreateContent } from "../../components/templates/create-content";
 import { FaTrash } from "react-icons/fa"
-
-function formatElements(elements: Elements[]) {
-  return elements.map(({ order, type, data, id }) => ({
-    id: order + 1, // +1 to avoid position 0
-    dbId: id,
-    type,
-    ...formatJSON(data),
-  }));
-}
+import { formatElements } from "../../utils/formatElements";
 
 export default function Home({ elements, slug }: { elements: Array<{ id: number, type: any, dbId: number }>, slug: string }) {
   const [component, setComponent] = useState("SOCIAL");

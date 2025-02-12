@@ -51,6 +51,16 @@ async function deleteElements(id: number[]) {
   });
 }
 
+async function updateElement(id: number, data: any) {
+  const updated = await prismaClient.elements.update({
+    where: { id },
+    data: {
+      data
+    }
+  });
+  return updated;
+}
+
 const handler: Handler = async (req, res) => {
   if (req.method === 'PUT') {
     const {
@@ -81,6 +91,12 @@ const handler: Handler = async (req, res) => {
     await deleteElements([Number(id)]);
 
     return res.json({ ok: true });
+  }
+
+  if (req.method === 'PATCH') {
+    const { id, data } = req.body;
+    const updated = await updateElement(Number(id), data);
+    return res.json(updated);
   }
 }
 
