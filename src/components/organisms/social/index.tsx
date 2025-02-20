@@ -7,6 +7,7 @@ import { FaYoutube, FaStar, FaTwitter } from 'react-icons/fa';
 import { BsDiscord, BsTiktok } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Draggable } from "../../atoms/draggable";
+import { IoTicket } from "react-icons/io5";
 
 const flexStyled = {
   border: "2px solid transparent",
@@ -38,11 +39,12 @@ export function Social({
     [SocialIcon.TikTok, BsTiktok],
     [SocialIcon.File, FaStar],
     [SocialIcon.Twitter, FaTwitter],
+    [SocialIcon.Ticket, IoTicket],
   ])
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    window?.["datafast"](`click_${id}`, { description: `Someone clicked on the link ${link}` });
+    window?.["datafast"]?.(`click_${id}`, { description: `Someone clicked on the link ${link}` });
     window.open(link, '_blank');
   }, [link, id]);
 

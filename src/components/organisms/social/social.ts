@@ -1,5 +1,4 @@
 import { FlexProps } from "@chakra-ui/react";
-import { IconType } from "react-icons";
 
 export enum SocialIcon {
   YouTube = 'YouTube',
@@ -8,6 +7,7 @@ export enum SocialIcon {
   Discord = 'Discord',
   Twitter = 'Twitter',
   File = 'File',
+  Ticket = 'Ticket',
 }
 
 export class SocialData {
