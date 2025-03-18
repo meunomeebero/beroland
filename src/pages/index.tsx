@@ -1,5 +1,5 @@
 import Confetti from 'react-confetti-boom';
-import { Divider, Flex, Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Input, VStack, Text, useToast } from "@chakra-ui/react";
+import { Divider, Flex, Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Input, VStack, Text, useToast, useColorModeValue } from "@chakra-ui/react";
 import { MainContainer } from "../components/atoms/main-container";
 import { FeedHead as Head } from "../components/atoms/feed-head";
 import { Bio } from "../components/organisms/bio";
@@ -79,7 +79,8 @@ export default function Home({ elements }) {
         width="16"
         height="16"
         borderRadius="full"
-        bg="white"
+        bg={useColorModeValue("pink.300", "white")}
+        color={useColorModeValue("gray.800", "gray.800")}
         boxShadow="lg"
         onClick={() => setIsOpen(true)}
         animation="bounce 2s infinite"
@@ -90,12 +91,21 @@ export default function Home({ elements }) {
 
       {/* Modal */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} isCentered>
-        <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px) hue-rotate(90deg)'/>
-        <ModalContent mx="4" bg="gray.800">
-          <ModalHeader>Fique por dentro dos meus proximos lançamentos 👀</ModalHeader>
-          <ModalCloseButton />
+        <ModalOverlay
+          bg={useColorModeValue('whiteAlpha.300', 'blackAlpha.300')}
+          backdropFilter='blur(10px) hue-rotate(90deg)'
+        />
+        <ModalContent
+          mx="4"
+          bg={useColorModeValue("white", "gray.800")}
+          boxShadow={useColorModeValue("0 4px 6px rgba(0,0,0,0.05)", "dark-lg")}
+          border={useColorModeValue("1px solid", "none")}
+          borderColor={useColorModeValue("gray.200", "transparent")}
+        >
+          <ModalHeader color={useColorModeValue("gray.600", "white")}>Fique por dentro dos meus proximos lançamentos 👀</ModalHeader>
+          <ModalCloseButton color={useColorModeValue("gray.600", "gray.400")} />
           <ModalBody pb={6}>
-            <Text fontSize="sm" color="gray.400" mb="6">
+            <Text fontSize="sm" color={useColorModeValue("gray.600", "gray.400")} mb="6">
               Quer aprender a programar? Quer criar aplicativos? Quer ser um Indie Hacker? Coloque seu e-mail aqui meu chapa! 👇🏻👇🏻👇🏻
             </Text>
             <form onSubmit={handleSubmit}>
@@ -105,8 +115,27 @@ export default function Home({ elements }) {
                   type="email"
                   name="email"
                   required
+                  bg={useColorModeValue("white", "gray.700")}
+                  borderColor={useColorModeValue("gray.300", "gray.600")}
+                  _hover={{
+                    borderColor: useColorModeValue("gray.400", "gray.500")
+                  }}
+                  _focus={{
+                    borderColor: useColorModeValue("pink.300", "pink.400"),
+                    boxShadow: useColorModeValue(
+                      "0 0 0 1px #AD1A72",
+                      "0 0 0 1px #ff79c6"
+                    )
+                  }}
                 />
-                <Button type="submit" width="full" bg="pink.400" _hover={{ bg: "pink.500" }} isLoading={isLoading}>
+                <Button
+                  type="submit"
+                  width="full"
+                  bg={useColorModeValue("pink.400", "pink.400")}
+                  color={useColorModeValue("white", "white")}
+                  _hover={{ bg: useColorModeValue("pink.500", "pink.500") }}
+                  isLoading={isLoading}
+                >
                   Enviar
                 </Button>
               </VStack>

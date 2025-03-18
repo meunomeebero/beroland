@@ -9,12 +9,17 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: #1d1e26;
+    background: var(--chakra-colors-gray-800);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #6272a4;
+    background: var(--chakra-colors-gray-600);
   }
+}
+
+/* Add smooth transition for theme changes */
+body, body * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 @keyframes bounce {

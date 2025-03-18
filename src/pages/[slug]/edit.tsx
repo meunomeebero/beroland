@@ -1,4 +1,4 @@
-import { Button, Flex, Icon, Select, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Icon, Select, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { MainContainer } from "../../components/atoms/main-container";
 import { Bio } from "../../components/organisms/bio";
 import { useEffect, useState } from "react";
@@ -21,6 +21,7 @@ import { ContentType, Elements } from "@prisma/client";
 import { CreateContent } from "../../components/templates/create-content";
 import { FaTrash } from "react-icons/fa"
 import { formatElements } from "../../utils/formatElements";
+import { ThemeToggle } from "../../components/molecules/theme-toggle";
 
 export default function Home({ elements, slug }: { elements: Array<{ id: number, type: any, dbId: number }>, slug: string }) {
   const [component, setComponent] = useState("SOCIAL");
@@ -64,12 +65,13 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
   return (
     <>
       <EditHead title={slug} />
+      <ThemeToggle />
       <Flex direction="column"  w="100vw" align="center" justify="center">
         <Bio p="8" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
         <MainContainer align="center" justify="center">
         <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={598}>
-          <Flex align="center" justify="center" direction="column" p="14px" bg="gray.800" borderRadius="lg">
+          <Flex align="center" justify="center" direction="column" p="14px" bg={useColorModeValue("gray.100", "gray.800")} borderRadius="lg">
             <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)} mb="4">
               {Object.keys(ContentType).map((key) => (
                 <option key={key} value={key}>{key}</option>
@@ -84,7 +86,15 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
             />
           </Flex>
           <Flex w="100%">
-            <Button p="7" bg={isDeleting ? "gray.700":"gray.800"} borderRadius="md" onClick={() => setIsDeleting(state => !state)}>
+            <Button 
+              p="7" 
+              bg={isDeleting 
+                ? useColorModeValue("gray.200", "gray.700") 
+                : useColorModeValue("gray.100", "gray.800")
+              } 
+              borderRadius="md" 
+              onClick={() => setIsDeleting(state => !state)}
+            >
               <Icon as={FaTrash} color="purple.400"/>
               <Text pl="4" fontWeight="bold">
                 Deletar

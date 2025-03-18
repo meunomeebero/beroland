@@ -30,7 +30,7 @@ export function Bio({ showLinks, ...data}: BioProps) {
           name={"Roberto Junior"}
           src={"/static/bero.png"}
           bg="#000"
-          border="2px solid #6272a4"
+          border="6px solid #F5F5F5"
         />
       </Flex>
     </Flex>

@@ -1,5 +1,21 @@
 import { extendTheme } from '@chakra-ui/react';
 
+export const notion = {
+  BackgroundDarker: '#F5F5F5',
+  BackgroundPrimary: '#FFFFFF',
+  BackgroundSecondary: '#F7F7F7',
+  CurrentLine: '#EAEAEA',
+  Comment: '#8F8F8F',
+  Foreground: '#37352F',
+  Cyan: '#148FD8',
+  Green: '#0F7B6C',
+  Orange: '#D9730D',
+  Pink: '#AD1A72',
+  Purple: '#6940A5',
+  Red: '#E03E3E',
+  Yellow: '#DFAB01',
+};
+
 export const dracula = {
   BackgroundDarker: '#181818',
   BackgroundPrimary: '#1d1e26',
@@ -49,22 +65,31 @@ export const textGradiant = {
   bgClip: "text",
 }
 
-export const theme = extendTheme({
-  initialColorMode: 'dark',
-  useSystemColorMode: false,
-  styles: {
-    global: {
-      body: {
-        bg: dracula.BackgroundPrimary,
-        color: dracula.Foreground,
-      }
+const colors = {
+  light: {
+    gray: {
+      950: notion.Foreground,
+      900: notion.BackgroundPrimary,
+      800: notion.BackgroundSecondary,
+      700: notion.CurrentLine,
+      600: notion.Comment,
+      50: notion.Foreground,
+    },
+    pink: {
+      400: notion.Pink,
+      300: '#F5EFFF',
+    },
+    purple: {
+      400: notion.Purple,
+    },
+    green: {
+      400: notion.Green,
+    },
+    red: {
+      400: notion.Red
     }
   },
-  fonts: {
-    body: 'Nunito',
-    heading: 'Nunito',
-  },
-  colors: {
+  dark: {
     gray: {
       950: dracula.BackgroundDarker,
       900: dracula.BackgroundPrimary,
@@ -87,4 +112,22 @@ export const theme = extendTheme({
       400: dracula.Red
     }
   }
+};
+
+export const theme = extendTheme({
+  initialColorMode: 'light', // Setting light mode as default
+  useSystemColorMode: false,
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: props.colorMode === 'dark' ? dracula.BackgroundPrimary : notion.BackgroundPrimary,
+        color: props.colorMode === 'dark' ? dracula.Foreground : notion.Foreground,
+      }
+    })
+  },
+  fonts: {
+    body: 'Nunito',
+    heading: 'Nunito',
+  },
+  colors: colors.light
 });

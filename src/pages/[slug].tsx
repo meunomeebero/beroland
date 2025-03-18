@@ -11,6 +11,7 @@ import { formatJSON } from "../utils/format-json";
 import { GetServerSideProps } from "next";
 import { Location } from "@prisma/client";
 import { Footer } from "../components/organisms/footer";
+import { ThemeToggle } from "../components/molecules/theme-toggle";
 
 export default function Page({ elements }) {
   const items = useMemo(() => {
@@ -20,6 +21,7 @@ export default function Page({ elements }) {
   return (
     <>
       <Head />
+      <ThemeToggle />
       <Flex direction="column"  w="100vw" align="center" justify="flex-start" minH="100vh">
         <Bio pt="8" pb="0" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>
