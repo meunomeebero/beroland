@@ -17,7 +17,7 @@ import { GetServerSideProps } from "next";
 import axios from "axios";
 import { debounce } from "../../utils/debounce";
 import { EditHead } from "../../components/atoms/edit-head";
-import { ContentType, Elements } from "@prisma/client";
+import { ContentType } from "@prisma/client";
 import { CreateContent } from "../../components/templates/create-content";
 import { FaTrash } from "react-icons/fa"
 import { formatElements } from "../../utils/formatElements";
@@ -27,6 +27,10 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
   const [component, setComponent] = useState("SOCIAL");
   const [items, setItems] = useState(elements.sort((a, b) => a.id - b.id));
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Pré-calculando os valores de cores para evitar chamadas condicionais de hooks
+  const deletingBgColor = useColorModeValue("gray.200", "gray.700");
+  const normalBgColor = useColorModeValue("gray.100", "gray.800");
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -86,13 +90,10 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
             />
           </Flex>
           <Flex w="100%">
-            <Button 
-              p="7" 
-              bg={isDeleting 
-                ? useColorModeValue("gray.200", "gray.700") 
-                : useColorModeValue("gray.100", "gray.800")
-              } 
-              borderRadius="md" 
+            <Button
+              p="7"
+              bg={isDeleting ? deletingBgColor : normalBgColor}
+              borderRadius="md"
               onClick={() => setIsDeleting(state => !state)}
             >
               <Icon as={FaTrash} color="purple.400"/>
