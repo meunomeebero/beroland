@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import { Footer } from "../components/organisms/footer";
 import axios from 'axios';
 import { Location } from '@prisma/client';
+import { ThemeToggle } from '../components/molecules/theme-toggle';
 
 export default function Home({ elements }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,7 @@ export default function Home({ elements }) {
   return (
     <>
       <Head />
+      <ThemeToggle />
       <Flex direction="column"  w="100vw" align="center" justify="center">
         <Bio pt="8" pb="0" />
         <Confetti mode="fall" colors={["#FFFFFF"]}/>

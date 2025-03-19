@@ -4,7 +4,7 @@ import { ContentType } from '../components/templates/content';
 import { formatElements } from '../utils/formatElements';
 
 /**
- * Interface para as respostas da API
+ * Interface for API responses
  */
 interface ApiResponse<T = any> {
   data: T;
@@ -13,7 +13,7 @@ interface ApiResponse<T = any> {
 }
 
 /**
- * Interface para erros da API
+ * Interface for API errors
  */
 interface ApiError {
   message: string;
@@ -22,26 +22,26 @@ interface ApiError {
 }
 
 /**
- * Hook personalizado para interagir com a API
+ * Custom hook for interacting with the API
  */
 export function useApi() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<ApiError | null>(null);
 
   /**
-   * Tratamento de erros da API
+   * API error handling
    */
   const handleError = useCallback((error: AxiosError): ApiError => {
     const status = error.response?.status || 500;
-    const statusText = error.response?.statusText || 'Erro interno do servidor';
-    const message = error.message || 'Ocorreu um erro ao processar sua solicitação';
+    const statusText = error.response?.statusText || 'Internal server error';
+    const message = error.message || 'An error occurred while processing your request';
     
-    console.error('Erro na API:', { status, statusText, message });
+    console.error('API Error:', { status, statusText, message });
     return { status, statusText, message };
   }, []);
 
   /**
-   * Criação de um novo elemento
+   * Creating a new element
    */
   const createElement = useCallback(async <T = any>(
     pageSlug: string,
@@ -82,7 +82,7 @@ export function useApi() {
   }, [handleError]);
 
   /**
-   * Atualização de um elemento existente
+   * Updating an existing element
    */
   const updateElement = useCallback(async <T = any>(
     id: number,
@@ -118,7 +118,7 @@ export function useApi() {
   }, [handleError]);
 
   /**
-   * Exclusão de um elemento
+   * Deleting an element
    */
   const deleteElement = useCallback(async <T = any>(
     id: number,

@@ -2,13 +2,13 @@ import { Button, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { useCallback } from "react";
 import { FaTrash } from "react-icons/fa";
 
-// Hooks personalizados
+// Custom hooks
 import { useTheme, useApi } from "../../hooks";
 
-// Tipos compartilhados
+// Shared types
 import { BaseContentProps } from "../../types/content";
 
-// Componentes de conteúdo
+// Content components
 import { Affiliate } from "../organisms/affiliate";
 import { Banner } from "../organisms/banner";
 import { Divider } from "../organisms/divider";
@@ -17,49 +17,51 @@ import { Social } from "../organisms/social"
 import { Text } from "../organisms/text";
 import { YoutubeIframe } from "../organisms/youtube-iframe";
 import { Markdown } from "../organisms/markdown";
+import { Button as ButtonComponent } from "../organisms/button";
 
 /**
- * Tipos de conteúdo disponíveis na aplicação
+ * Content types available in the application
  */
 export enum ContentType {
-  Social = 'SOCIAL',
-  Iframe = 'IFRAME',
-  Affiliate = 'AFFILIATE',
-  Section = 'SECTION',
-  BANNER = "BANNER",
-  TEXT = 'TEXT',
-  DIVIDER = 'DIVIDER',
-  MARKDOWN = 'MARKDOWN',
+  Social = "SOCIAL",
+  Iframe = "IFRAME",
+  Affiliate = "AFFILIATE",
+  Title = "SECTION",
+  Banner = "BANNER",
+  Text = "TEXT",
+  Divider = "DIVIDER",
+  Markdown = "MARKDOWN",
+  Button = "BUTTON"
 }
 
 /**
- * Interface de props para o componente Content
+ * Props interface for the Content component
  */
 export interface ContentProps extends BaseContentProps {
-  /** Tipo do conteúdo sendo renderizado */
+  /** Type of content being rendered */
   type: ContentType | string;
 
-  /** Dados do elemento */
+  /** Element data */
   data: any;
 
-  /** Propriedades adicionais específicas de cada tipo */
+  /** Additional properties specific to each type */
   [key: string]: any;
 }
 
 /**
- * Componente que renderiza o tipo de conteúdo apropriado com base nas props
+ * Component that renders the appropriate content type based on props
  */
 export function Content(props: ContentProps) {
   const theme = useTheme();
 
-  // Cores específicas para o botão de exclusão
+  // Specific colors for the delete button
   const trashIconColor = useColorModeValue(theme.accent.secondary, theme.accent.primary);
 
-  // Importar o hook da API
+  // Import the API hook
   const api = useApi();
 
   /**
-   * Remove o elemento através da API
+   * Removes the element through the API
    */
   const deleteElement = useCallback(async () => {
     if (!props.dbId || !props.reload) return;
@@ -72,10 +74,10 @@ export function Content(props: ContentProps) {
   }, [api, props.dbId, props.reload]);
 
   /**
-   * Retorna o componente apropriado baseado no tipo
+   * Returns the appropriate component based on type
    */
   function getComponent() {
-    // Para garantir que a comparação funcione tanto com strings quanto com enum
+    // To ensure comparison works with both strings and enum
     const typeStr = String(props.type);
 
     switch (typeStr) {
@@ -85,24 +87,21 @@ export function Content(props: ContentProps) {
       case String(ContentType.Iframe):
       case 'IFRAME':
         return <YoutubeIframe {...props}/>
-      case String(ContentType.Affiliate):
-      case 'AFFILIATE':
-        return <Affiliate {...props}/>
-      case String(ContentType.Section):
+      case String(ContentType.Title):
       case 'SECTION':
         return <Section {...props}/>
-      case String(ContentType.BANNER):
-      case 'BANNER':
-        return <Banner {...props}/>
-      case String(ContentType.TEXT):
+      case String(ContentType.Text):
       case 'TEXT':
         return <Text {...props}/>
-      case String(ContentType.DIVIDER):
+      case String(ContentType.Divider):
       case 'DIVIDER':
         return <Divider {...props}/>
-      case String(ContentType.MARKDOWN):
+      case String(ContentType.Markdown):
       case 'MARKDOWN':
         return <Markdown {...props}/>
+      case String(ContentType.Button):
+      case 'BUTTON':
+        return <ButtonComponent {...props}/>
       default:
         return null;
     }

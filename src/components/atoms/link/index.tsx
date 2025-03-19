@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { LinkProps } from "./link-props";
 
 /**
- * Componente de link que encapsula o NextLink para fornecer estilos e funcionalidades consistentes
+ * Link component that encapsulates NextLink to provide consistent styles and functionality
  */
 export function Link({ 
   href, 

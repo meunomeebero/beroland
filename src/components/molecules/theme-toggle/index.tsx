@@ -2,7 +2,7 @@ import { IconButton, Box } from "@chakra-ui/react";
 import { useTheme } from "../../../hooks/useTheme";
 import { FC, useCallback } from "react";
 
-// Definindo interface para os ícones
+// Defining interface for icons
 interface IconProps {
   color?: string;
 }
@@ -33,7 +33,7 @@ const SunIcon: FC<IconProps> = ({ color = "currentColor" }) => (
   </Box>
 );
 
-// Definindo interface para o botão de toggle
+// Defining interface for the toggle button
 interface ThemeToggleProps {
   position?: {
     top?: string;
@@ -44,15 +44,15 @@ interface ThemeToggleProps {
 }
 
 /**
- * Componente de botão para alternar entre os temas claro e escuro
+ * Button component to toggle between light and dark themes
  */
 export function ThemeToggle({ position = { top: "4", left: "4" } }: ThemeToggleProps) {
   const theme = useTheme();
   
-  // Selecionando o ícone correto com base no tema atual
+  // Selecting the correct icon based on the current theme
   const icon = theme.isLight ? <MoonIcon /> : <SunIcon />;
   
-  // Estilos baseados no tema atual
+  // Styles based on the current theme
   const bg = theme.isLight ? "white" : "gray.800";
   const iconColor = theme.isLight ? theme.accent.secondary : theme.accent.yellow;
   
@@ -83,7 +83,7 @@ export function ThemeToggle({ position = { top: "4", left: "4" } }: ThemeToggleP
     <IconButton
       position="fixed"
       {...position}
-      aria-label="Alternar tema"
+      aria-label="Toggle theme"
       icon={icon}
       onClick={handleToggleTheme}
       bg={bg}

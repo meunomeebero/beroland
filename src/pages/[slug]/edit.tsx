@@ -10,15 +10,14 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Content } from "../../components/templates/content";
+import { Content, ContentType } from "../../components/templates/content";
 import { prismaClient } from "../api/_prisma";
 import { formatJSON } from "../../utils/format-json";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import { debounce } from "../../utils/debounce";
 import { EditHead } from "../../components/atoms/edit-head";
-import { ContentType } from "@prisma/client";
-import { CreateContent } from "../../components/templates/create-content";
+import { CreateElement } from "../../components/templates/create-element";
 import { FaTrash } from "react-icons/fa"
 import { formatElements } from "../../utils/formatElements";
 import { ThemeToggle } from "../../components/molecules/theme-toggle";
@@ -27,7 +26,7 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
   const [component, setComponent] = useState("SOCIAL");
   const [items, setItems] = useState(elements.sort((a, b) => a.id - b.id));
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   // Pré-calculando os valores de cores para evitar chamadas condicionais de hooks
   const deletingBgColor = useColorModeValue("gray.200", "gray.700");
   const normalBgColor = useColorModeValue("gray.100", "gray.800");
@@ -77,11 +76,11 @@ export default function Home({ elements, slug }: { elements: Array<{ id: number,
         <Stack spacing="4" flex="1" minW="320px" alignItems="center" mb="6" maxW={598}>
           <Flex align="center" justify="center" direction="column" p="14px" bg={useColorModeValue("gray.100", "gray.800")} borderRadius="lg">
             <Select id="component" variant='flushed' value={component} padding={1} onChange={e => setComponent(e.target.value)} mb="4">
-              {Object.keys(ContentType).map((key) => (
-                <option key={key} value={key}>{key}</option>
+              {Object.entries(ContentType).map(([key, value]) => (
+                <option key={key} value={value}>{key}</option>
               ))}
             </Select>
-            <CreateContent
+            <CreateElement
               type={component}
               items={items}
               setItems={setItems}

@@ -2,35 +2,35 @@ import { Box, Textarea, Icon, Flex, useColorModeValue } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { FaGripVertical } from "react-icons/fa";
 
-// Hooks personalizados
+// Custom hooks
 import { useTheme, useApi } from "../../../hooks";
 
-// Componentes
+// Components
 import { Draggable } from "../../atoms/draggable";
 
-// Utilitários
+// Utilities
 import { markdown } from "../../../utils/markdown";
 
-// Tipagem
+// Types
 import { MarkdownProps } from "./markdown-props";
 
 /**
- * Componente de Markdown com suporte a edição inline
+ * Markdown component with inline editing support
  */
 export function Markdown({ isDraggable, isEditing, data }: MarkdownProps) {
   const theme = useTheme();
   const [isEditable, setIsEditable] = useState(false);
   const [content, setContent] = useState(data.content);
 
-  // Estilos baseados no tema
+  // Theme-based styles
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const textColor = useColorModeValue("gray.800", "gray.50");
   const borderColor = useColorModeValue("gray.200", "gray.700");
 
-  // Utilizando o hook da API
+  // Using the API hook
   const api = useApi();
   
-  // Lida com atualização do conteúdo quando o usuário termina a edição
+  // Handles content update when the user finishes editing
   const handleUpdate = useCallback(async () => {
     await api.updateElement(
       data.dbId,
@@ -43,7 +43,7 @@ export function Markdown({ isDraggable, isEditing, data }: MarkdownProps) {
     );
   }, [api, data.dbId, content, data.order]);
 
-  // Componente de conteúdo Markdown (editável ou somente leitura)
+  // Markdown content component (editable or read-only)
   const MarkdownContent = (
     <Box w="100%" position="relative">
       {isEditing && (
@@ -100,7 +100,7 @@ export function Markdown({ isDraggable, isEditing, data }: MarkdownProps) {
     </Box>
   );
 
-  // Renderiza com ou sem funcionalidade de arrastar
+  // Renders with or without drag functionality
   return !isDraggable ? MarkdownContent : (
     <Draggable id={data.id}>
       <Flex w="100%" position="relative" align="flex-start">

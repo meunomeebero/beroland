@@ -6,24 +6,25 @@ import { CreateSection } from "../organisms/create-section";
 import { CreateSocial } from "../organisms/create-social";
 import { CreateText } from "../organisms/create-text";
 import { CreateMarkdown } from "../organisms/create-markdown";
+import { CreateButton } from "../organisms/create-button";
 import { ContentType } from "./content";
 
-export function CreateContent(props) {
+export function CreateElement(props) {
   switch (props.type) {
     case ContentType.Social:
       return <CreateSocial {...props}/>
     case ContentType.Iframe:
       return <CreateIframe {...props}/>
-    case ContentType.Affiliate:
-      return <CreateAffiliate {...props}/>
-    case ContentType.Section:
+    case ContentType.Title:
       return <CreateSection {...props}/>
-    case ContentType.TEXT:
+    case ContentType.Text:
       return <CreateText {...props}/>
-    case ContentType.DIVIDER:
+    case ContentType.Divider:
       return <CreateDivider {...props}/>
-    case ContentType.MARKDOWN:
+    case ContentType.Markdown:
       return <CreateMarkdown {...props}/>
+    case ContentType.Button:
+      return <CreateButton {...props}/>
     default:
       return <></>;
   }

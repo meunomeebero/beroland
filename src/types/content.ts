@@ -6,19 +6,19 @@ import { ContentType } from "../components/templates/content";
 export interface BaseContentProps {
   /** Element ID in the database */
   dbId?: number;
-  
+
   /** Flag indicating if the element is in edit mode */
   isEditing?: boolean;
-  
+
   /** Flag indicating if the element is in delete mode */
   isDeleting?: boolean;
-  
+
   /** Flag indicating if the element can be dragged */
   isDraggable?: boolean;
-  
+
   /** Function to reload the elements list */
   reload?: (data?: any) => void;
-  
+
   /** Content type being rendered (optional here, but required in ContentProps) */
   type?: ContentType | string;
 }
@@ -52,19 +52,23 @@ export interface ContentTypeMap {
     highlight: string;
     image: string;
   };
-  [ContentType.Section]: {
+  [ContentType.Title]: {
     title: string;
   };
-  [ContentType.TEXT]: {
+  [ContentType.Text]: {
     text: string;
   };
-  [ContentType.MARKDOWN]: {
+  [ContentType.Markdown]: {
     content: string;
   };
-  [ContentType.DIVIDER]: Record<string, never>;
-  [ContentType.BANNER]: {
+  [ContentType.Divider]: Record<string, never>;
+  [ContentType.Banner]: {
     title: string;
     subtitle: string;
     image?: string;
+  };
+  [ContentType.Button]: {
+    text: string;
+    url: string;
   };
 }

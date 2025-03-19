@@ -29,7 +29,7 @@ export const themeTokens = {
         secondary: '#F0F0F0',
       }
     },
-    
+
     // Dark theme tokens (Dracula inspired)
     dark: {
       bg: {
@@ -139,7 +139,7 @@ const chakraColors = {
     },
     pink: {
       400: notion.Pink,
-      300: '#F5EFFF',
+      300: '#E1B1CA',
     },
     purple: {
       400: notion.Purple,

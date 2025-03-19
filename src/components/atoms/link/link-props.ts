@@ -2,15 +2,15 @@ import { LinkProps as NextLinkProps } from "next/link";
 import { ReactNode } from "react";
 
 /**
- * Interface de props estendida para o componente Link
+ * Extended props interface for the Link component
  */
 export interface LinkProps extends NextLinkProps {
-  /** Conteúdo a ser renderizado dentro do link */
+  /** Content to be rendered inside the link */
   children: ReactNode;
   
-  /** Atributo target para abrir em nova aba ou definir comportamento de navegação */
+  /** Target attribute to open in a new tab or define navigation behavior */
   target?: string;
   
-  /** Props adicionais a serem passadas para o elemento <a> */
+  /** Additional props to be passed to the <a> element */
   aProps?: React.CSSProperties;
 }

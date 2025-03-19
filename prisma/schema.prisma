@@ -16,6 +16,7 @@ enum ContentType {
   TEXT
   DIVIDER
   MARKDOWN
+  BUTTON
 }
 
 model Elements {
