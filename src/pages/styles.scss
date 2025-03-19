@@ -19,7 +19,20 @@
 
 /* Add smooth transition for theme changes */
 body, body * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  transition: 
+    background-color 0.3s ease, 
+    color 0.3s ease, 
+    border-color 0.3s ease, 
+    box-shadow 0.3s ease !important;
+}
+
+/* Theme specific variables will be applied via data-theme attribute on html element */
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @keyframes bounce {

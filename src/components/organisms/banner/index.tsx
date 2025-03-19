@@ -3,8 +3,21 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Draggable } from "../../atoms/draggable";
 import { Link } from "../../atoms/link";
+import { BaseContentProps } from "../../../types/content";
 
-export function Banner({ data: { id, imageURL, url }, isDraggable}) {
+/**
+ * Interface for Banner component props
+ */
+interface BannerProps extends BaseContentProps {
+  data: any;
+}
+
+/**
+ * Banner component that displays an image with an optional link
+ */
+export function Banner({ data, isDraggable = false }: BannerProps) {
+  // Extract values with fallbacks to prevent errors
+  const { id = 0, imageURL = '', url = '#' } = data || {};
   const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {

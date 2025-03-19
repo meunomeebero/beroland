@@ -28,10 +28,22 @@ const aStyle = {
 export function Social({
   icon,
   isEditing,
-  isDraggable,
+  isDraggable = false,  // Default value to prevent errors
   containerProps,
-  data: { content, link, title, fallbackLink, id }
+  data
 }: SocialProps) {
+  // Extract values with fallbacks to prevent errors
+  const { 
+    content = '', 
+    link = '#', 
+    title = '', 
+    fallbackLink = '', 
+    id = 0,
+    icon: dataIcon  // Icon can come from either props or data.icon
+  } = data || {};
+  
+  // Use icon from props or data with fallback
+  const iconToUse = icon || dataIcon || SocialIcon.File;  // Default to File icon
   const iconMap = new Map([
     [SocialIcon.YouTube, FaYoutube],
     [SocialIcon.Discord, BsDiscord],
@@ -65,7 +77,7 @@ export function Social({
             <Text color="pink.400" fontWeight="bold" opacity={0.4} fontSize="lg">{title}</Text>
             <Text fontStyle="italic" fontSize="md" mt="1" fontWeight="medium" opacity={0.8}>{content}</Text>
           </Box>
-          <Icon as={iconMap.get(icon)} w="6" h="6" color="pink.400"/>
+          <Icon as={iconMap.get(iconToUse)} w="6" h="6" color="pink.400" opacity={0.4}/>
         </a>
       </Flex>
     </ElementContainer>

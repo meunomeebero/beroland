@@ -1,18 +1,25 @@
-import { IconButton, useColorMode, useColorModeValue, Box } from "@chakra-ui/react";
+import { IconButton, Box } from "@chakra-ui/react";
+import { useTheme } from "../../../hooks/useTheme";
+import { FC, useCallback } from "react";
+
+// Definindo interface para os ícones
+interface IconProps {
+  color?: string;
+}
 
 // Custom Moon Icon component
-const MoonIcon = () => (
+const MoonIcon: FC<IconProps> = ({ color = "currentColor" }) => (
   <Box w="18px" h="18px" display="flex" justifyContent="center" alignItems="center">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   </Box>
 );
 
 // Custom Sun Icon component
-const SunIcon = () => (
+const SunIcon: FC<IconProps> = ({ color = "currentColor" }) => (
   <Box w="18px" h="18px" display="flex" justifyContent="center" alignItems="center">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="5" />
       <line x1="12" y1="1" x2="12" y2="3" />
       <line x1="12" y1="21" x2="12" y2="23" />
@@ -26,20 +33,61 @@ const SunIcon = () => (
   </Box>
 );
 
-export function ThemeToggle() {
-  const { toggleColorMode } = useColorMode();
-  const icon = useColorModeValue(<MoonIcon />, <SunIcon />);
-  const bg = useColorModeValue("white", "gray.800");
+// Definindo interface para o botão de toggle
+interface ThemeToggleProps {
+  position?: {
+    top?: string;
+    left?: string;
+    right?: string;
+    bottom?: string;
+  };
+}
+
+/**
+ * Componente de botão para alternar entre os temas claro e escuro
+ */
+export function ThemeToggle({ position = { top: "4", left: "4" } }: ThemeToggleProps) {
+  const theme = useTheme();
+  
+  // Selecionando o ícone correto com base no tema atual
+  const icon = theme.isLight ? <MoonIcon /> : <SunIcon />;
+  
+  // Estilos baseados no tema atual
+  const bg = theme.isLight ? "white" : "gray.800";
+  const iconColor = theme.isLight ? theme.accent.secondary : theme.accent.yellow;
+  
+  // Function to toggle theme and synchronize data-theme attribute
+  const handleToggleTheme = useCallback(() => {
+    // Toggle the color mode
+    theme.toggleColorMode();
+    
+    // Wait for the next DOM update to get the updated value
+    setTimeout(() => {
+      // Get the new color mode from localStorage
+      const colorMode = localStorage.getItem("chakra-ui-color-mode") || "light";
+      
+      // Update data-theme attribute
+      document.documentElement.setAttribute("data-theme", colorMode);
+      
+      // Dispatch custom event for theme change
+      window.dispatchEvent(new CustomEvent("themechange", { 
+        detail: { colorMode } 
+      }));
+      
+      // Also dispatch storage event for compatibility
+      window.dispatchEvent(new Event("storage"));
+    }, 0);
+  }, [theme]);
 
   return (
     <IconButton
       position="fixed"
-      top="4"
-      left="4"
-      aria-label="Toggle theme"
+      {...position}
+      aria-label="Alternar tema"
       icon={icon}
-      onClick={toggleColorMode}
+      onClick={handleToggleTheme}
       bg={bg}
+      color={iconColor}
       size="md"
       borderRadius="full"
       boxShadow="md"
@@ -47,6 +95,7 @@ export function ThemeToggle() {
       transition="all 0.3s ease"
       _hover={{
         transform: "scale(1.05)",
+        boxShadow: "lg",
       }}
     />
   );

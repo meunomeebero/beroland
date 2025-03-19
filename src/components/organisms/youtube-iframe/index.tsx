@@ -3,7 +3,20 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Draggable } from "../../atoms/draggable";
 
-export function YoutubeIframe({ data: { id, videoId }, isDraggable}) {
+// Interface para as props
+interface YoutubeIframeProps {
+  data: any;  // Para compatibilidade com ContentProps
+  isDraggable?: boolean;
+  type?: string;  // Para compatibilidade com ContentProps
+  dbId?: number;  // Para compatibilidade com ContentProps
+  reload?: (data?: any) => void;  // Para compatibilidade com ContentProps
+  isEditing?: boolean;  // Para compatibilidade com ContentProps
+  isDeleting?: boolean;  // Para compatibilidade com ContentProps
+}
+
+export function YoutubeIframe({ data, isDraggable = false }: YoutubeIframeProps) {
+  // Extrair valores com fallbacks para evitar erros
+  const { id = 0, videoId = '' } = data || {};
   const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {

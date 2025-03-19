@@ -26,8 +26,11 @@ export class SocialData {
 export interface SocialProps {
   isEditing?: boolean;
   containerProps?: FlexProps;
-  icon: SocialIcon;
+  icon?: SocialIcon;  // Optional for compatibility with ContentProps
   isDraggable?: boolean;
   isDeleting?: boolean;
-  data: SocialData;
+  data: any;  // Using 'any' for compatibility, but practically will be SocialData
+  type?: string;  // For compatibility with ContentProps
+  dbId?: number;  // For compatibility with ContentProps
+  reload?: (data?: any) => void;  // For compatibility with ContentProps
 }

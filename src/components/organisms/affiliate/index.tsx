@@ -12,7 +12,22 @@ const flexStyled = {
   }
 }
 
-export function Affiliate({ data: { link, text, highlight, image, id }, isDraggable}) {
+/**
+ * Interface para as props do componente Affiliate
+ */
+interface AffiliateProps {
+  data: any;  // Para compatibilidade com ContentProps
+  isDraggable?: boolean;
+  type?: string;  // Para compatibilidade com ContentProps
+  dbId?: number;  // Para compatibilidade com ContentProps
+  reload?: (data?: any) => void;  // Para compatibilidade com ContentProps
+  isEditing?: boolean;  // Para compatibilidade com ContentProps
+  isDeleting?: boolean;  // Para compatibilidade com ContentProps
+}
+
+export function Affiliate({ data, isDraggable = false }: AffiliateProps) {
+  // Extrair valores com fallbacks para evitar erros
+  const { link = '#', text = '', highlight = '', image = '', id = 0 } = data || {};
   const Component = (
     <a href={!isDraggable && link} style={{ width: '100%' }}>
       <ElementContainer
