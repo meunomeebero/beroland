@@ -53,9 +53,11 @@ export interface ContentProps extends BaseContentProps {
  */
 export function Content(props: ContentProps) {
   const theme = useTheme();
+  const { dbId, reload, isDeleting } = props;
 
   // Specific colors for the delete button
   const trashIconColor = useColorModeValue(theme.accent.secondary, theme.accent.primary);
+  const deleteButtonHoverBg = useColorModeValue("gray.100", "gray.700");
 
   // Import the API hook
   const api = useApi();
@@ -64,14 +66,14 @@ export function Content(props: ContentProps) {
    * Removes the element through the API
    */
   const deleteElement = useCallback(async () => {
-    if (!props.dbId || !props.reload) return;
+    if (!dbId || !reload) return;
 
-    await api.deleteElement(props.dbId, () => {
-      if (props.reload) {
-        props.reload();
+    await api.deleteElement(dbId, () => {
+      if (reload) {
+        reload();
       }
     });
-  }, [api, props.dbId, props.reload]);
+  }, [api, dbId, reload]);
 
   /**
    * Returns the appropriate component based on type
@@ -107,7 +109,7 @@ export function Content(props: ContentProps) {
     }
   }
 
-  return !props.isDeleting ? getComponent() : (
+  return !isDeleting ? getComponent() : (
     <Flex w="100%" position="relative" align="center" justify="center">
       <Button
         position="absolute"
@@ -115,7 +117,7 @@ export function Content(props: ContentProps) {
         left="-14"
         onClick={deleteElement}
         variant="ghost"
-        _hover={{ bg: useColorModeValue("gray.100", "gray.700") }}
+        _hover={{ bg: deleteButtonHoverBg }}
       >
         <Icon as={FaTrash} color={trashIconColor}/>
       </Button>
