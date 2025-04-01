@@ -33,15 +33,15 @@ export function Social({
   data
 }: SocialProps) {
   // Extract values with fallbacks to prevent errors
-  const { 
-    content = '', 
-    link = '#', 
-    title = '', 
-    fallbackLink = '', 
+  const {
+    content = '',
+    link = '#',
+    title = '',
+    fallbackLink = '',
     id = 0,
     icon: dataIcon  // Icon can come from either props or data.icon
   } = data || {};
-  
+
   // Use icon from props or data with fallback
   const iconToUse = icon || dataIcon || SocialIcon.File;  // Default to File icon
   const iconMap = new Map([
@@ -54,11 +54,14 @@ export function Social({
     [SocialIcon.Ticket, IoTicket],
   ])
 
+
   const handleClick = useCallback((e: React.MouseEvent) => {
+    const titleFormatted = title.replace(/ /g, '_');
+
     e.preventDefault();
-    window?.["datafast"]?.(`click_${id}`, { description: `Someone clicked on the link ${link}` });
+    window?.["datafast"]?.(`click_${titleFormatted}`, { description: `Someone clicked on the link ${link}` });
     window.open(link, '_blank');
-  }, [link, id]);
+  }, [link, title]);
 
   const NormalComponent = (
     <ElementContainer
