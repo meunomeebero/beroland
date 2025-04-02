@@ -15,10 +15,11 @@ export function Button({ data }: ButtonProps) {
   const handleClick = useCallback((e: React.MouseEvent) => {
     if (!data || !data.text || !data.url) return;
 
-    const urlDomain = new URL(data.url).hostname;
-
+    const urlDomain = new URL(data.url).hostname.replaceAll(".", "_");
+    const eventName = `click_${urlDomain}`;
+    console.log(eventName);
     e.preventDefault();
-    window?.["datafast"]?.(`click_${urlDomain}`, { description: `Someone clicked on the button ${data.url}` });
+    window?.["datafast"]?.(eventName, { description: `Someone clicked on the button ${data.url}` });
     window.open(data.url, '_blank');
   }, [data]);
 
